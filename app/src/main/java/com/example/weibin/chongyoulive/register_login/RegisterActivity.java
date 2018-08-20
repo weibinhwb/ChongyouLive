@@ -10,7 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.weibin.chongyoulive.Base;
+import com.example.weibin.chongyoulive.base.Base;
 import com.example.weibin.chongyoulive.R;
 import com.tencent.qalsdk.QALSDKManager;
 
@@ -36,9 +36,9 @@ public class RegisterActivity extends AppCompatActivity {
         setSupportActionBar(registerToolbar);
 
         QALSDKManager.getInstance().setEnv(0);
-        QALSDKManager.getInstance().init(getApplicationContext(), Base.sdkAppid);
+        QALSDKManager.getInstance().init(getApplicationContext(), Base.SDK_APPID);
 
-        mTLSHelper = TLSHelper.getInstance().init(getApplicationContext(), Base.sdkAppid);
+        mTLSHelper = TLSHelper.getInstance().init(getApplicationContext(), Base.SDK_APPID);
 
         mTLSPwdRegListener = new TLSPwdRegListener() {
             @Override

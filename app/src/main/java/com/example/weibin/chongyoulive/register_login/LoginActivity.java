@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.weibin.chongyoulive.Base;
+import com.example.weibin.chongyoulive.base.Base;
 import com.example.weibin.chongyoulive.R;
 import com.tencent.imsdk.TIMCallBack;
 import com.tencent.imsdk.TIMManager;
@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initTLS() {
-        mTLSLoginHelper = TLSLoginHelper.getInstance().init(getApplicationContext(), Base.sdkAppid, Base.accountType, "1.0");
+        mTLSLoginHelper = TLSLoginHelper.getInstance().init(getApplicationContext(), Base.SDK_APPID, Base.ACCOUNT_TYPE, "1.0");
         mTLSLoginHelper.setTimeOut(5000);
     }
 
@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void OnPwdLoginSuccess(TLSUserInfo tlsUserInfo) {
                 Log.d(TAG, "OnPwdLoginSuccess: " + tlsUserInfo.describeContents());
                 String userSig = mTLSLoginHelper.getUserSig(tlsUserInfo.identifier);
+                Log.d(TAG, "OnPwdLoginSuccess: " + userSig);
                 TIMManager.getInstance().login(mIdentify, userSig, new TIMCallBack() {
                     @Override
                     public void onError(int i, String s) {

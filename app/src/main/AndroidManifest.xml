@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.weibin.chongyoulive">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -18,7 +19,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".LiveApplication"
+        android:name=".base.LiveApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -69,8 +70,9 @@
         </receiver>
 
         <activity android:name=".register_login.LoginActivity" />
-        <activity android:name=".register_login.RegisterActivity">
-        </activity>
+        <activity android:name=".register_login.RegisterActivity" />
+        <activity android:name=".LiveActivity" />
+        <activity android:name=".AddLiveActivity"></activity>
     </application>
 
 </manifest>
