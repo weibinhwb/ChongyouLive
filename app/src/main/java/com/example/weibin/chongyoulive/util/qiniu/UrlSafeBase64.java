@@ -1,4 +1,4 @@
-package com.example.weibin.chongyoulive.qinniuUtils;
+package com.example.weibin.chongyoulive.util.qiniu;
 
 /**
  * URL安全的Base64编码和解码

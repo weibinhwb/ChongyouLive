@@ -1,4 +1,4 @@
-package com.example.weibin.chongyoulive.qinniuUtils;
+package com.example.weibin.chongyoulive.util.qiniu;
 
 import java.nio.charset.Charset;
 

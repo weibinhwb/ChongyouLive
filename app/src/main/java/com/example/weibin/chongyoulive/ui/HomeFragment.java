@@ -1,4 +1,4 @@
-package com.example.weibin.chongyoulive;
+package com.example.weibin.chongyoulive.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,16 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.weibin.chongyoulive.R;
+import com.example.weibin.chongyoulive.base.BaseFragment;
 import com.example.weibin.chongyoulive.base.HomeLivePresenter;
-import com.example.weibin.chongyoulive.base.IHomeLiveContract;
-import com.example.weibin.chongyoulive.base.LiveBean;
 import com.tencent.imsdk.ext.group.TIMGroupDetailInfo;
 
 import java.util.List;
 
 import static com.example.weibin.chongyoulive.base.IHomeLiveContract.*;
 
-public class HomeFragment extends Fragment implements View.OnClickListener, IHomeView{
+public class HomeFragment extends BaseFragment implements View.OnClickListener, IHomeView{
 
     private RecyclerView mHomeLiveRecycler;
     private HomeLiveAdapter mLiveAdapter;
@@ -29,7 +29,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, IHom
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mIHomePresenter = new HomeLivePresenter(this);
     }
 
     @Nullable
@@ -46,6 +45,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, IHom
     @Override
     public void onClick(View v) {
 
+    }
+
+    @Override
+    protected void loadData() {
+        super.loadData();
+        mIHomePresenter = new HomeLivePresenter(this);
     }
 
     @Override

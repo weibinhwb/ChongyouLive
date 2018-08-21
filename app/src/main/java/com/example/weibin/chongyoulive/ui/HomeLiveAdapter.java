@@ -1,4 +1,4 @@
-package com.example.weibin.chongyoulive;
+package com.example.weibin.chongyoulive.ui;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,9 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.weibin.chongyoulive.base.LiveBean;
+import com.example.weibin.chongyoulive.R;
 import com.tencent.imsdk.ext.group.TIMGroupDetailInfo;
-import com.tencent.imsdk.protocol.msg;
 
 import java.util.List;
 

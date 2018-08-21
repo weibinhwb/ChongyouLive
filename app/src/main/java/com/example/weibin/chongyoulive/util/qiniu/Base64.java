@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.example.weibin.chongyoulive.qinniuUtils;
+package com.example.weibin.chongyoulive.util.qiniu;
 
 import java.io.UnsupportedEncodingException;
 

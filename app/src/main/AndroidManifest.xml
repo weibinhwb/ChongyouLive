@@ -26,7 +26,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -71,8 +71,9 @@
 
         <activity android:name=".register_login.LoginActivity" />
         <activity android:name=".register_login.RegisterActivity" />
-        <activity android:name=".LiveActivity" />
-        <activity android:name=".AddLiveActivity"></activity>
+        <activity android:name=".ui.LiveActivity" />
+        <activity android:name=".ui.AddLiveActivity">
+        </activity>
     </application>
 
 </manifest>

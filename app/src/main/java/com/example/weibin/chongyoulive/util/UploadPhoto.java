@@ -1,17 +1,14 @@
-package com.example.weibin.chongyoulive;
+package com.example.weibin.chongyoulive.util;
 
 
-import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.example.weibin.chongyoulive.qinniuUtils.Auth;
+import com.example.weibin.chongyoulive.util.qiniu.Auth;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
 
 import org.json.JSONObject;
-
-import java.io.File;
 
 import static com.example.weibin.chongyoulive.base.Base.AccessKey;
 import static com.example.weibin.chongyoulive.base.Base.SecreKey;

@@ -1,4 +1,4 @@
-package com.example.weibin.chongyoulive;
+package com.example.weibin.chongyoulive.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

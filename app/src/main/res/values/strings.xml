@@ -4,4 +4,6 @@
     <string name="verify_code">输入验证码</string>
     <string name="input_password">输入密码</string>
     <string name="add_live">添加Live</string>
+    <string name="add_a_new_live">发起一场live</string>
+    <string name="about_me">个人主页</string>
 </resources>

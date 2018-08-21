@@ -1,4 +1,4 @@
-package com.example.weibin.chongyoulive;
+package com.example.weibin.chongyoulive.ui;
 
 import android.Manifest;
 import android.content.Intent;
@@ -19,12 +19,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.weibin.chongyoulive.R;
+import com.example.weibin.chongyoulive.util.UploadPhoto;
 import com.example.weibin.chongyoulive.base.Base;
 import com.example.weibin.chongyoulive.util.MyImageResizer;
 import com.tencent.imsdk.TIMGroupManager;
 import com.tencent.imsdk.TIMValueCallBack;
 
-import java.io.File;
 import java.util.Date;
 
 public class AddLiveActivity extends AppCompatActivity implements View.OnClickListener{

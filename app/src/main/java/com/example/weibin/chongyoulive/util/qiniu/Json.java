@@ -1,4 +1,4 @@
-package com.example.weibin.chongyoulive.qinniuUtils;
+package com.example.weibin.chongyoulive.util.qiniu;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

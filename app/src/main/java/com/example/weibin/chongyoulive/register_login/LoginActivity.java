@@ -10,8 +10,13 @@ import android.widget.EditText;
 
 import com.example.weibin.chongyoulive.base.Base;
 import com.example.weibin.chongyoulive.R;
+import com.example.weibin.chongyoulive.database.UserDatabase;
+import com.example.weibin.chongyoulive.database.UserEntity;
+import com.example.weibin.chongyoulive.ui.LiveActivity;
 import com.tencent.imsdk.TIMCallBack;
 import com.tencent.imsdk.TIMManager;
+
+import java.util.List;
 
 import tencent.tls.platform.TLSErrInfo;
 import tencent.tls.platform.TLSLoginHelper;
@@ -65,6 +70,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onSuccess() {
                         Log.d(TAG, "onSuccess: ");
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                UserEntity userEntity = new UserEntity();
+                                userEntity.setUserId(mIdentify);
+                                userEntity.setUserPassword(mPassword);
+                                UserDatabase.getINSTANCE(LoginActivity.this).getUserEntityDao().insertUser(userEntity);
+                            }
+                        }).start();
                     }
                 });
             }

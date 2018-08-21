@@ -1,4 +1,4 @@
-package com.example.weibin.chongyoulive;
+package com.example.weibin.chongyoulive.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,17 +12,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.weibin.chongyoulive.R;
 import com.example.weibin.chongyoulive.register_login.LoginActivity;
 import com.tencent.imsdk.TIMValueCallBack;
 import com.tencent.imsdk.ext.group.TIMGroupBaseInfo;
-import com.tencent.imsdk.ext.group.TIMGroupManagerExt;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class AboutMeFragment extends Fragment implements View.OnClickListener{
 
-    private ImageView mAboutMeImage;
-    private TextView mAboutMeName, mAboutAddLive;
+    private CircleImageView mAboutMeImage;
+    private TextView mAboutMeName, mAboutAddLive, mAboutMeSlogan, mAboutMeNext;
     private static final String TAG = "AboutMeFragment";
 
     @Override
@@ -37,7 +39,8 @@ public class AboutMeFragment extends Fragment implements View.OnClickListener{
         mAboutMeImage = view.findViewById(R.id.about_me_image);
         mAboutMeName = view.findViewById(R.id.about_me_name);
         mAboutAddLive = view.findViewById(R.id.about_me_add_live);
-
+        mAboutMeSlogan = view.findViewById(R.id.about_me_slogan);
+        mAboutMeNext = view.findViewById(R.id.about_me_next);
         mAboutAddLive.setOnClickListener(this);
         mAboutMeImage.setOnClickListener(this);
         return view;
