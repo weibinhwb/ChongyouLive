@@ -34,8 +34,7 @@ public class HomeLiveAdapter extends RecyclerView.Adapter<HomeLiveAdapter.HomeLi
     @Override
     public void onBindViewHolder(@NonNull HomeLiveViewHolder homeLiveViewHolder, int i) {
         homeLiveViewHolder.mHomeLiveName.setText(mTIMGroupDetailInfos.get(i).getGroupName());
-        Glide.with(homeLiveViewHolder.itemView.getContext()).load(mTIMGroupDetailInfos.get(i)
-                .getFaceUrl()).into(homeLiveViewHolder.mHomeLivePhoto);
+        Glide.with(homeLiveViewHolder.itemView.getContext()).load(mTIMGroupDetailInfos.get(i).getFaceUrl()).into(homeLiveViewHolder.mHomeLivePhoto);
     }
 
     @Override

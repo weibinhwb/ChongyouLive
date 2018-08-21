@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.weibin.chongyoulive.base.Base;
+import com.example.weibin.chongyoulive.util.MyImageResizer;
 import com.tencent.imsdk.TIMGroupManager;
 import com.tencent.imsdk.TIMValueCallBack;
 
@@ -81,7 +82,9 @@ public class AddLiveActivity extends AppCompatActivity implements View.OnClickLi
                     mLiveDescribe = mLiveDescribeEdit.getText().toString();
                     String key = new Date().getTime() + "";
                     addLive(Base.UPLOAD_PHOTO_BASE_URL + key);
-                    UploadPhoto.getUploadInstance.instance().uploadImage2QiNiu(mLivePhotoPath, new Date().getTime() + key);
+                    UploadPhoto.getUploadInstance.instance().
+                            uploadImage2QiNiu(MyImageResizer.
+                                    decodeSampledBitmapFromFile(mLivePhotoPath, 400, 300), key);
                 }
                 break;
             case R.id.add_live_photo:
@@ -89,6 +92,15 @@ public class AddLiveActivity extends AppCompatActivity implements View.OnClickLi
                 break;
         }
     }
+
+    private void pickPhoto() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, SELECTED_PHOTO);
+        isSelectedPhoto = true;
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -106,14 +118,6 @@ public class AddLiveActivity extends AppCompatActivity implements View.OnClickLi
                     cursor.close();
                 }
         }
-    }
-
-    private void pickPhoto() {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent, SELECTED_PHOTO);
-        isSelectedPhoto = true;
     }
 
     private void requestPermission() {

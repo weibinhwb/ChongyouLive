@@ -1,6 +1,7 @@
 package com.example.weibin.chongyoulive;
 
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.example.weibin.chongyoulive.qinniuUtils.Auth;
@@ -29,9 +30,9 @@ public class UploadPhoto {
         }
     }
 
-    public void uploadImage2QiNiu(String path ,String key) {
+    public void uploadImage2QiNiu(byte[] data, String key) {
         UploadManager uploadManager = new UploadManager();
-        uploadManager.put(path, key, Auth.create(AccessKey, SecreKey).uploadToken("chongyou-live"), new UpCompletionHandler() {
+        uploadManager.put(data, key, Auth.create(AccessKey, SecreKey).uploadToken("chongyou-live"), new UpCompletionHandler() {
             @Override
             public void complete(String key, ResponseInfo info, JSONObject response) {
                 if (info.isOK()) {
