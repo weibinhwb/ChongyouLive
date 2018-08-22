@@ -7,7 +7,6 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 
-
 /**
  * Created by weibin on 2018/8/21
  */

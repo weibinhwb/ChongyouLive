@@ -6,4 +6,7 @@
     <string name="add_live">添加Live</string>
     <string name="add_a_new_live">发起一场live</string>
     <string name="about_me">个人主页</string>
+    <string name="nick_name">昵称</string>
+    <string name="your_style_slogan">一句话，让世界认识你</string>
+    <string name="login_title">登录</string>
 </resources>

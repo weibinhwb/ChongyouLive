@@ -1,6 +1,9 @@
 package com.example.weibin.chongyoulive.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +13,21 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.weibin.chongyoulive.R;
-import com.tencent.imsdk.ext.group.TIMGroupDetailInfo;
+import com.example.weibin.chongyoulive.base.DetailLiveBean;
+import com.example.weibin.chongyoulive.base.LiveDetailModel;
 
-import java.util.List;
+public class HomeLiveAdapter extends RecyclerView.Adapter<HomeLiveAdapter.HomeLiveViewHolder> {
 
-public class HomeLiveAdapter extends RecyclerView.Adapter<HomeLiveAdapter.HomeLiveViewHolder>{
+    private DetailLiveBean mDetailLiveBean;
+    private Context mContext;
+    public static final String SHOW_DETAIL = "show_detail";
 
-    private List<TIMGroupDetailInfo> mTIMGroupDetailInfos;
+    public HomeLiveAdapter(Context context) {
+        mContext = context;
+    }
 
-    public void setLiveBean(List<TIMGroupDetailInfo> timGroupDetailInfos) {
-        this.mTIMGroupDetailInfos = timGroupDetailInfos;
+    public void setDetailLiveBean(DetailLiveBean detailLiveBean) {
+        mDetailLiveBean = detailLiveBean;
     }
 
     @NonNull
@@ -31,23 +39,41 @@ public class HomeLiveAdapter extends RecyclerView.Adapter<HomeLiveAdapter.HomeLi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeLiveViewHolder homeLiveViewHolder, int i) {
-        homeLiveViewHolder.mHomeLiveName.setText(mTIMGroupDetailInfos.get(i).getGroupName());
-        Glide.with(homeLiveViewHolder.itemView.getContext()).load(mTIMGroupDetailInfos.get(i).getFaceUrl()).into(homeLiveViewHolder.mHomeLivePhoto);
+    public void onBindViewHolder(@NonNull HomeLiveViewHolder holder, int i) {
+        holder.mHomeLiveName.setText(mDetailLiveBean.getGroupInfo().get(i).getName());
+        Glide.with(holder.itemView.getContext()).load(mDetailLiveBean.getGroupInfo().get(i).getFaceUrl()).into(holder.mHomeLivePhoto);
+        holder.mCardView.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, LiveDetailActivity.class);
+            LiveDetailModel model = new LiveDetailModel();
+            DetailLiveBean.GroupInfoBean groupInfoBean = mDetailLiveBean.getGroupInfo().get(holder.getAdapterPosition());
+            model.setLiveName(groupInfoBean.getName());
+            model.setLiveIntroduce(groupInfoBean.getIntroduction());
+            model.setLivePhotoUrl(groupInfoBean.getFaceUrl());
+            model.setLiveOwener(groupInfoBean.getOwner_Account());
+            model.setLiveDate(groupInfoBean.getCreateTime() + "");
+            model.setLiveJoinPerson(groupInfoBean.getMemberList().size() + "");
+//            model.setLiveOwenerIntroduce(groupInfoBean.ge);
+            model.setLiveId(groupInfoBean.getGroupId());
+            intent.putExtra(SHOW_DETAIL, model);
+            mContext.startActivity(intent);
+        });
     }
 
     @Override
     public int getItemCount() {
-        return mTIMGroupDetailInfos == null ? 0 : mTIMGroupDetailInfos.size();
+        return mDetailLiveBean == null ? 0 : mDetailLiveBean.getGroupInfo().size();
     }
 
-    static class HomeLiveViewHolder extends RecyclerView.ViewHolder{
+    static class HomeLiveViewHolder extends RecyclerView.ViewHolder {
         TextView mHomeLiveName;
         ImageView mHomeLivePhoto;
+        CardView mCardView;
+
         HomeLiveViewHolder(@NonNull View itemView) {
             super(itemView);
-            mHomeLiveName = (TextView) itemView.findViewById(R.id.home_live_name);
-            mHomeLivePhoto = (ImageView) itemView.findViewById(R.id.home_live_photo);
+            mHomeLiveName = itemView.findViewById(R.id.home_live_name);
+            mHomeLivePhoto = itemView.findViewById(R.id.home_live_photo);
+            mCardView = itemView.findViewById(R.id.home_live_card);
         }
     }
 }

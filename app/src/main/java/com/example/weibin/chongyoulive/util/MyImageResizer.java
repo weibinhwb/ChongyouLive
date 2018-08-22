@@ -41,14 +41,18 @@ public class MyImageResizer {
         return inSampleSize;
     }
 
-    public static byte[] decodeSampledBitmapFromFile(String filePath, int reqWidth, int reqHeight){
-        final BitmapFactory.Options options = new BitmapFactory.Options();
+    public static byte[] bitmap2Byte (String filePath, int reqWidth, int reqHeight){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        decodeSampledBitmapFromFile(filePath, reqWidth, reqHeight).compress(Bitmap.CompressFormat.JPEG, 80, baos);
+        return baos.toByteArray();
+    }
+
+    public static Bitmap decodeSampledBitmapFromFile(String filePath, int reqWidth, int reqHeight){
+        final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(filePath , options);
         options.inSampleSize = calculateInSampleSize(options,reqWidth,reqHeight);
         options.inJustDecodeBounds = false;
-        BitmapFactory.decodeFile(filePath,options).compress(Bitmap.CompressFormat.JPEG, 70, baos);
-        return baos.toByteArray();
+        return BitmapFactory.decodeFile(filePath,options);
     }
 }

@@ -19,16 +19,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.weibin.chongyoulive.R;
-import com.example.weibin.chongyoulive.util.UploadPhoto;
 import com.example.weibin.chongyoulive.base.Base;
 import com.example.weibin.chongyoulive.util.MyImageResizer;
+import com.example.weibin.chongyoulive.util.UploadPhoto;
+import com.tencent.imsdk.TIMCallBack;
+import com.tencent.imsdk.TIMGroupAddOpt;
 import com.tencent.imsdk.TIMGroupManager;
 import com.tencent.imsdk.TIMValueCallBack;
+import com.tencent.imsdk.ext.group.TIMGroupManagerExt;
 
 import java.util.Date;
 
-public class AddLiveActivity extends AppCompatActivity implements View.OnClickListener{
+public class AddLiveActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText mLiveNameEdit, mLiveDescribeEdit;
     private ImageView mLivePhotoView;
@@ -38,7 +42,6 @@ public class AddLiveActivity extends AppCompatActivity implements View.OnClickLi
     private String mLiveName;
     private String mLiveDescribe;
     private String mLivePhotoPath;
-    private boolean isSelectedPhoto = false;
     private final static String TAG = "AddFragment";
 
     @Override
@@ -69,7 +72,24 @@ public class AddLiveActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onSuccess(String s) {
                 Log.d(TAG, "onSuccess: " + s);
+                modifyLivePermission(s);
                 Toast.makeText(AddLiveActivity.this, "创建Live成功！", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void modifyLivePermission(String liveId) {
+        TIMGroupManagerExt.ModifyGroupInfoParam param = new TIMGroupManagerExt.ModifyGroupInfoParam(liveId);
+        param.setAddOption(TIMGroupAddOpt.TIM_GROUP_ADD_ANY);
+        TIMGroupManagerExt.getInstance().modifyGroupInfo(param, new TIMCallBack() {
+            @Override
+            public void onError(int code, String desc) {
+                Log.e(TAG, "modify group info failed, code:" + code + "|desc:" + desc);
+            }
+
+            @Override
+            public void onSuccess() {
+
             }
         });
     }
@@ -78,14 +98,12 @@ public class AddLiveActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add_live_commit:
-                if (isSelectedPhoto) {
+                if (mLivePhotoPath != null && !mLivePhotoPath.equals("")) {
                     mLiveName = mLiveNameEdit.getText().toString();
                     mLiveDescribe = mLiveDescribeEdit.getText().toString();
                     String key = new Date().getTime() + "";
+                    UploadPhoto.getUploadInstance.instance().uploadImage2QiNiu(MyImageResizer.bitmap2Byte(mLivePhotoPath, 400, 300), key);
                     addLive(Base.UPLOAD_PHOTO_BASE_URL + key);
-                    UploadPhoto.getUploadInstance.instance().
-                            uploadImage2QiNiu(MyImageResizer.
-                                    decodeSampledBitmapFromFile(mLivePhotoPath, 400, 300), key);
                 }
                 break;
             case R.id.add_live_photo:
@@ -99,7 +117,6 @@ public class AddLiveActivity extends AppCompatActivity implements View.OnClickLi
         intent.setAction(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, SELECTED_PHOTO);
-        isSelectedPhoto = true;
     }
 
 
@@ -108,14 +125,14 @@ public class AddLiveActivity extends AppCompatActivity implements View.OnClickLi
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case SELECTED_PHOTO:
-                if (resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     Uri selectedPhoto = data.getData();
-                    String[] filePathColumn = { MediaStore.Images.Media.DATA };
-                    Cursor cursor =getContentResolver().query(selectedPhoto,
-                            filePathColumn, null, null, null);
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                    Cursor cursor = getContentResolver().query(selectedPhoto, filePathColumn, null, null, null);
                     cursor.moveToFirst();
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                     mLivePhotoPath = cursor.getString(columnIndex);
+                    Glide.with(AddLiveActivity.this).load(MyImageResizer.decodeSampledBitmapFromFile(mLivePhotoPath, mLivePhotoView.getWidth(), mLivePhotoView.getHeight())).into(mLivePhotoView);
                     cursor.close();
                 }
         }
@@ -123,7 +140,7 @@ public class AddLiveActivity extends AppCompatActivity implements View.OnClickLi
 
     private void requestPermission() {
         if (ContextCompat.checkSelfPermission(AddLiveActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(AddLiveActivity.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            ActivityCompat.requestPermissions(AddLiveActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         } else {
             pickPhoto();
         }

@@ -26,13 +26,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.MainActivity"></activity>
         <!-- 消息收发 service -->
         <service
             android:name="com.tencent.qalsdk.service.QalService"
@@ -69,11 +63,19 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".register_login.LoginActivity" />
-        <activity android:name=".register_login.RegisterActivity" />
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.RegisterActivity" />
         <activity android:name=".ui.LiveActivity" />
-        <activity android:name=".ui.AddLiveActivity">
+        <activity android:name=".ui.AddLiveActivity" />
+        <activity android:name=".ui.AboutMeDetailActivity" />
+        <activity android:name=".ui.StartAppActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".ui.LiveDetailActivity"></activity>
     </application>
 
 </manifest>

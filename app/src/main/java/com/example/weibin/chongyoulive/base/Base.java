@@ -10,4 +10,5 @@ public class Base {
     public static final String AccessKey = "RRpz3BSP9gqNaRrL3myuygNcs5_V17m_hg02dWAv";
     public static final String SecreKey = "BOvbg8_TwBQX2Q_7peJsoV4Bsxy48w581GvIuzX3";
     public static final String UPLOAD_PHOTO_BASE_URL = "http://pdqpejgdg.bkt.clouddn.com/";
+    public static final String DETAIL_LIVE = "get_group_info?usersig=" + USER_SIG+ "&identifier="+IDENTIFIER+"&sdkappid="+SDK_APPID+"&contenttype=json";
 }

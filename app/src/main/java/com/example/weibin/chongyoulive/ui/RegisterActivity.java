@@ -1,4 +1,4 @@
-package com.example.weibin.chongyoulive.register_login;
+package com.example.weibin.chongyoulive.ui;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
                     case 2:
                         Toast.makeText(RegisterActivity.this, "该账号已经注册...", Toast.LENGTH_SHORT).show();
                         break;
-                        default:
+                    default:
                 }
             }
 
@@ -127,20 +127,20 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void replaceFragment(Fragment fragment) {
         FragmentTransaction transaction = getFragmentTransaction();
-        transaction.replace(R.id.register_container,fragment);
+        transaction.replace(R.id.register_container, fragment);
         transaction.commit();
     }
 
     public void replaceFragmentUseStack(Fragment fragment) {
         FragmentTransaction transaction = getFragmentTransaction();
-        transaction.replace(R.id.register_container , fragment);
+        transaction.replace(R.id.register_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
     public void addFragment(Fragment fragment) {
         FragmentTransaction transaction = getFragmentTransaction();
-        transaction.add(R.id.register_container , fragment);
+        transaction.add(R.id.register_container, fragment);
         transaction.commit();
     }
 

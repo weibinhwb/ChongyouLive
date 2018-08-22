@@ -4,27 +4,30 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.weibin.chongyoulive.R;
-import com.example.weibin.chongyoulive.register_login.LoginActivity;
+import com.example.weibin.chongyoulive.base.BaseFragment;
+import com.tencent.imsdk.TIMFriendshipManager;
+import com.tencent.imsdk.TIMManager;
+import com.tencent.imsdk.TIMUserProfile;
 import com.tencent.imsdk.TIMValueCallBack;
 import com.tencent.imsdk.ext.group.TIMGroupBaseInfo;
+import com.tencent.imsdk.ext.group.TIMGroupManagerExt;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+public class AboutMeFragment extends BaseFragment {
 
-public class AboutMeFragment extends Fragment implements View.OnClickListener{
-
-    private CircleImageView mAboutMeImage;
-    private TextView mAboutMeName, mAboutAddLive, mAboutMeSlogan, mAboutMeNext;
+    private RecyclerView mAboutMeLiveRecycler;
+    private AboutMyLiveAdapter mMyLiveAdapter;
     private static final String TAG = "AboutMeFragment";
 
     @Override
@@ -36,38 +39,50 @@ public class AboutMeFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about_me, container, false);
-        mAboutMeImage = view.findViewById(R.id.about_me_image);
-        mAboutMeName = view.findViewById(R.id.about_me_name);
-        mAboutAddLive = view.findViewById(R.id.about_me_add_live);
-        mAboutMeSlogan = view.findViewById(R.id.about_me_slogan);
-        mAboutMeNext = view.findViewById(R.id.about_me_next);
-        mAboutAddLive.setOnClickListener(this);
-        mAboutMeImage.setOnClickListener(this);
+        mAboutMeLiveRecycler = view.findViewById(R.id.about_me_recycler);
+        mMyLiveAdapter = new AboutMyLiveAdapter(getContext());
+        mAboutMeLiveRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAboutMeLiveRecycler.setAdapter(mMyLiveAdapter);
         return view;
+    }
+
+    @Override
+    protected void loadData() {
+        super.loadData();
+        getMyDetailInfo();
+        getMyLive();
+    }
+
+    private void getMyDetailInfo() {
+        TIMFriendshipManager.getInstance().getSelfProfile(new TIMValueCallBack<TIMUserProfile>() {
+            @Override
+            public void onError(int i, String s) {
+                Log.d(TAG, "onError: " + s + "获取个人资料出错");
+            }
+
+            @Override
+            public void onSuccess(TIMUserProfile timUserProfile) {
+                Log.d(TAG, "onSuccess: " + "获取个人资料成功");
+                mMyLiveAdapter.setTIMUserProfile(timUserProfile);
+                mMyLiveAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void getMyLive() {
         TIMValueCallBack<List<TIMGroupBaseInfo>> cb = new TIMValueCallBack<List<TIMGroupBaseInfo>>() {
             @Override
             public void onError(int i, String s) {
-                Log.d(TAG, "onError: " + s);
+                Log.d(TAG, "onError: " + s + "获取我的Live失败");
             }
 
             @Override
             public void onSuccess(List<TIMGroupBaseInfo> timGroupBaseInfos) {
-                //获取我加入的live的资料
+                mMyLiveAdapter.setGroupBaseInfos(timGroupBaseInfos);
+                mMyLiveAdapter.notifyDataSetChanged();
+                Log.d(TAG, "onSuccess: " + "展示我的Live");
             }
         };
-    }
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.about_me_add_live:
-                startActivity(new Intent(getContext(), AddLiveActivity.class));
-                break;
-            case R.id.about_me_image:
-                startActivity(new Intent(getContext(), LoginActivity.class));
-                break;
-        }
+        TIMGroupManagerExt.getInstance().getGroupList(cb);
     }
 }

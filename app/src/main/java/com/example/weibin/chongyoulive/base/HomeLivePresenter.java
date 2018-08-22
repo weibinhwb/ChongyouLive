@@ -1,17 +1,13 @@
 package com.example.weibin.chongyoulive.base;
 
-import com.tencent.imsdk.ext.group.TIMGroupDetailInfo;
-
-import java.util.List;
-
 import static com.example.weibin.chongyoulive.base.IHomeLiveContract.*;
 
-public class HomeLivePresenter implements IHomePresenter{
+public class HomeLivePresenter implements IHomePresenter<DetailLiveBean>{
 
     private IAllLiveModel mLiveModel;
-    private IHomeView mIHomeView;
+    private IHomeView<DetailLiveBean> mIHomeView;
 
-    public HomeLivePresenter(IHomeView view) {
+    public HomeLivePresenter(IHomeView<DetailLiveBean> view) {
         this.mIHomeView = view;
         mLiveModel = new HomeLiveModel();
         mLiveModel.setPresenter(this);
@@ -19,8 +15,8 @@ public class HomeLivePresenter implements IHomePresenter{
     }
 
     @Override
-    public void getData(List<TIMGroupDetailInfo> timGroupDetailInfos) {
-        mIHomeView.showView(timGroupDetailInfos);
+    public void getData(DetailLiveBean detailLiveBean) {
+        mIHomeView.showView(detailLiveBean);
     }
 
     @Override

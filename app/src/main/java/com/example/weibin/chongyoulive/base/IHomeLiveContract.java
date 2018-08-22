@@ -5,12 +5,13 @@ import com.tencent.imsdk.ext.group.TIMGroupDetailInfo;
 import java.util.List;
 
 public interface IHomeLiveContract {
-    interface IHomePresenter {
-        void getData(List<TIMGroupDetailInfo> timGroupDetailInfos);
+
+    interface IHomePresenter<T> {
+        void getData(T t);
         void failed();
     }
-    interface IHomeView {
-        void showView(List<TIMGroupDetailInfo> timGroupDetailInfos);
+    interface IHomeView<T>{
+        void showView(T t);
         void failed();
     }
 }

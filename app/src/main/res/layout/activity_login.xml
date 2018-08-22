@@ -6,12 +6,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".register_login.LoginActivity">
+    tools:context=".ui.LoginActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/login_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <TextView
+            android:textSize="25sp"
+            android:text="@string/login_title"
+            android:id="@+id/login_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"/>
     </android.support.v7.widget.Toolbar>
 
     <EditText
@@ -41,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         tools:ignore="LabelFor" />
 
     <Button

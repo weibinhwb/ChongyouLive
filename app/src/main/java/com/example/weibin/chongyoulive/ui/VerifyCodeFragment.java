@@ -1,4 +1,4 @@
-package com.example.weibin.chongyoulive.register_login;
+package com.example.weibin.chongyoulive.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
