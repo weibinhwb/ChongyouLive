@@ -2,24 +2,17 @@ package com.example.weibin.chongyoulive.base;
 
 
 
-import org.json.JSONObject;
+import com.example.weibin.chongyoulive.bean.DetailLiveBean;
+import com.example.weibin.chongyoulive.bean.LiveBean;
 
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
-
-import static com.example.weibin.chongyoulive.base.Base.DETAIL_LIVE;
 
 public interface HttpService {
 

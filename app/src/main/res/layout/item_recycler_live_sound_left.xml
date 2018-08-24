@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:padding="5dp"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@+id/message_face_left"
+        android:layout_gravity="center"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="fitXY"/>
+    <RelativeLayout
+        android:layout_marginStart="5dp"
+        android:layout_gravity="start"
+        android:id="@+id/live_left"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/left_msg"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <ImageView
+            android:id="@+id/iv_audio_sound"
+            android:gravity="center_vertical"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:src="@drawable/sound_left_0"
+            />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/live_right_audio_time"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="12sp"
+        />
+</LinearLayout>

@@ -5,42 +5,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.LiveActivity">
+    tools:context=".ui.activity.LiveActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/live_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/message_refresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
     </android.support.v7.widget.Toolbar>
+
+    <Button
+        android:id="@+id/live_audio"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Audio"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/live_edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_refresh" />
 
     <EditText
         android:id="@+id/live_edit"
-        android:layout_width="324dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="250dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/message_commit"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/live_audio"
+        app:layout_constraintTop_toBottomOf="@+id/message_refresh" />
 
     <Button
         android:id="@+id/message_commit"
-        android:layout_width="58dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/live_recycler"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/live_edit"
+        app:layout_constraintTop_toBottomOf="@+id/message_refresh" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/message_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="451dp"
         app:layout_constraintBottom_toTopOf="@+id/live_edit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/live_toolbar"></android.support.v7.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/live_toolbar">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/live_recycler"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/live_edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/live_toolbar"
+            >
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </android.support.constraint.ConstraintLayout>

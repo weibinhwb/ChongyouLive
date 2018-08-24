@@ -15,6 +15,33 @@ public class UserEntity {
     private int id;
     private String userId;
     private String userPassword;
+    private String mNickName;
+    private String mFaceUrl;
+    private String mSlogan;
+
+    public String getNickName() {
+        return mNickName;
+    }
+
+    public void setNickName(String nickName) {
+        mNickName = nickName;
+    }
+
+    public String getFaceUrl() {
+        return mFaceUrl;
+    }
+
+    public void setFaceUrl(String faceUrl) {
+        mFaceUrl = faceUrl;
+    }
+
+    public String getSlogan() {
+        return mSlogan;
+    }
+
+    public void setSlogan(String slogan) {
+        mSlogan = slogan;
+    }
 
     public int getId() {
         return id;

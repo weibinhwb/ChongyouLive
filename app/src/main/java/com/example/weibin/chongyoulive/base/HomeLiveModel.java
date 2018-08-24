@@ -2,9 +2,8 @@ package com.example.weibin.chongyoulive.base;
 
 import android.util.Log;
 
-import com.tencent.imsdk.TIMValueCallBack;
-import com.tencent.imsdk.ext.group.TIMGroupDetailInfo;
-import com.tencent.imsdk.ext.group.TIMGroupManagerExt;
+import com.example.weibin.chongyoulive.bean.DetailLiveBean;
+import com.example.weibin.chongyoulive.bean.LiveBean;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,12 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
