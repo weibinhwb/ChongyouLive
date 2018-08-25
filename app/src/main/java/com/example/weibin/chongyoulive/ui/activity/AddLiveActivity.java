@@ -22,15 +22,25 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.weibin.chongyoulive.R;
 import com.example.weibin.chongyoulive.base.Base;
+import com.example.weibin.chongyoulive.database.UserDatabase;
+import com.example.weibin.chongyoulive.database.UserEntity;
 import com.example.weibin.chongyoulive.util.photo.MyImageResizer;
 import com.example.weibin.chongyoulive.util.photo.UploadPhoto;
 import com.tencent.imsdk.TIMCallBack;
 import com.tencent.imsdk.TIMGroupAddOpt;
 import com.tencent.imsdk.TIMGroupManager;
+import com.tencent.imsdk.TIMManager;
 import com.tencent.imsdk.TIMValueCallBack;
 import com.tencent.imsdk.ext.group.TIMGroupManagerExt;
 
 import java.util.Date;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class AddLiveActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -57,12 +67,13 @@ public class AddLiveActivity extends AppCompatActivity implements View.OnClickLi
         mLivePhotoView.setOnClickListener(this);
     }
 
-    private void addLive(String faceUrl) {
+    private void addLive(String faceUrl,String operatorName) {
         TIMGroupManager.CreateGroupParam param = new TIMGroupManager.CreateGroupParam(TYPE, mLiveName);
         param.setIntroduction(mLiveDescribe);
         //上传群图片
         param.setFaceUrl(faceUrl);
         //可以自定义
+        param.setNotification(operatorName);
         TIMGroupManager.getInstance().createGroup(param, new TIMValueCallBack<String>() {
             @Override
             public void onError(int i, String s) {
@@ -103,7 +114,10 @@ public class AddLiveActivity extends AppCompatActivity implements View.OnClickLi
                     mLiveDescribe = mLiveDescribeEdit.getText().toString();
                     String key = new Date().getTime() + "";
                     UploadPhoto.getUploadInstance.instance().uploadImage2QiNiu(MyImageResizer.bitmap2Byte(mLivePhotoPath, 400, 300), key);
-                    addLive(Base.UPLOAD_PHOTO_BASE_URL + key);
+                    Observable.create((ObservableOnSubscribe<String>) emitter -> {
+                        UserEntity userEntity = UserDatabase.getINSTANCE(AddLiveActivity.this).getUserEntityDao().findUser(TIMManager.getInstance().getLoginUser());
+                        emitter.onNext(userEntity.getNickName());
+                    }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(s -> addLive(Base.UPLOAD_PHOTO_BASE_URL + key, s)).isDisposed();
                 }
                 break;
             case R.id.add_live_photo:

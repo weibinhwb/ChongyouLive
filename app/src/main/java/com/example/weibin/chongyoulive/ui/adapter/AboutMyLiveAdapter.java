@@ -2,7 +2,9 @@ package com.example.weibin.chongyoulive.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,10 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.weibin.chongyoulive.R;
 import com.example.weibin.chongyoulive.ui.activity.AboutMeDetailActivity;
 import com.example.weibin.chongyoulive.ui.activity.AddLiveActivity;
 import com.example.weibin.chongyoulive.ui.activity.LoginActivity;
+import com.example.weibin.chongyoulive.util.FastBlur;
 import com.tencent.imsdk.TIMManager;
 import com.tencent.imsdk.TIMUserProfile;
 import com.tencent.imsdk.ext.group.TIMGroupBaseInfo;
@@ -72,6 +77,12 @@ public class AboutMyLiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             ((AboutMyDataViewHolder) holder).mAboutMeName.setText(mTIMUserProfile.getNickName());
             ((AboutMyDataViewHolder) holder).mAboutMeSlogan.setText(mTIMUserProfile.getSelfSignature());
             Glide.with(holder.itemView.getContext()).load(mTIMUserProfile.getFaceUrl()).into(((AboutMyDataViewHolder) holder).mAboutMeImage);
+            Glide.with(holder.itemView.getContext()).asBitmap().load(mTIMUserProfile.getFaceUrl()).into(new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                    Glide.with(holder.itemView.getContext()).load(FastBlur.doBlur(resource, 20, false)).into(((AboutMyDataViewHolder) holder).mAboutMeBg);
+                }
+            });
             if(TIMManager.getInstance().getLoginUser().equals(""))
             {
                 ((AboutMyDataViewHolder) holder).mAboutMeCard.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, LoginActivity.class)));
@@ -126,6 +137,7 @@ public class AboutMyLiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         CircleImageView mAboutMeImage;
         TextView mAboutMeName, mAboutMeSlogan, mAboutMeNext;
         CardView mAboutMeCard;
+        ImageView mAboutMeBg;
         AboutMyDataViewHolder(@NonNull View view) {
             super(view);
             mAboutMeImage = view.findViewById(R.id.about_me_image);
@@ -133,6 +145,7 @@ public class AboutMyLiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             mAboutMeSlogan = view.findViewById(R.id.about_me_slogan);
             mAboutMeNext = view.findViewById(R.id.about_me_next);
             mAboutMeCard = view.findViewById(R.id.about_me_card);
+            mAboutMeBg = view.findViewById(R.id.about_me_data_bg);
         }
     }
 }

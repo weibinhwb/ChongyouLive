@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private List<Fragment> mFragmentList;
+    private List<String> mTabName;
     private MainPagerAdapter mPagerAdapter;
     private ViewPager mMainPager;
     private TabLayout mMainTab;
@@ -26,15 +27,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
+        initView();
+    }
+
+    private void initView() {
         Toolbar mainToolbar = findViewById(R.id.main_toolbar);
+        mainToolbar.setTitle("Live");
         setSupportActionBar(mainToolbar);
         mMainPager = findViewById(R.id.main_pager);
         mMainTab = findViewById(R.id.main_tablayout);
         mFragmentList = new ArrayList<>();
+        mTabName = new ArrayList<>();
         mFragmentList.add(new HomeFragment());
         mFragmentList.add(new AboutMeFragment());
-        mPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), mFragmentList);
+        mTabName.add("Live小讲");
+        mTabName.add("我的");
+        mPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), mFragmentList, mTabName);
         mMainPager.setAdapter(mPagerAdapter);
         mMainTab.setupWithViewPager(mMainPager);
     }
