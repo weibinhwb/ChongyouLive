@@ -7,12 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.AboutMeDetailActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/detail_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.Toolbar>
-
     <FrameLayout
         android:id="@+id/detail_container"
         android:layout_width="0dp"
@@ -21,7 +15,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_toolbar"
-        >
+        app:layout_constraintTop_toTopOf="parent">
     </FrameLayout>
 </android.support.constraint.ConstraintLayout>

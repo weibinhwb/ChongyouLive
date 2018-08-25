@@ -12,14 +12,11 @@ import com.example.weibin.chongyoulive.ui.fragment.AboutMeDetailFragment;
 
 public class AboutMeDetailActivity extends AppCompatActivity {
 
-    private Toolbar mDetailToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_me_detail);
-        mDetailToolbar = findViewById(R.id.detail_toolbar);
-        setSupportActionBar(mDetailToolbar);
 
         addFragment(new AboutMeDetailFragment());
     }

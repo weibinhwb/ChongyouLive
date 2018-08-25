@@ -1,77 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/detail_photo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="392dp"
-        android:layout_marginEnd="152dp"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="95dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_height="match_parent"
+    >
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/detail_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_launcher_background"/>
+        >
 
-    <TextView
-        android:id="@+id/detail_name"
-        android:layout_width="188dp"
-        android:layout_height="54dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_photo"
-        android:gravity="center"/>
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/detail_collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:contentScrim="@color/primary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:expandedTitleMarginEnd="10dp"
+            app:expandedTitleMarginStart="10dp"
+            app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Title">
+            <ImageView
+                android:id="@+id/detail_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.5"/>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/detail_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin">
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/detail_slogan"
-        android:layout_width="300dp"
-        android:layout_height="23dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="58dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_name"
-        android:gravity="center"/>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:text="我是有底线的"
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView2"
         android:layout_width="match_parent"
-        android:layout_height="22dp"
-        android:layout_marginBottom="175dp"
-        android:layout_marginTop="61dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_slogan"
-        app:layout_constraintVertical_bias="1.0"
-        android:gravity="center"/>
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/detail_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/about_me_fb"
+        android:id="@+id/detail_fb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.975"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.984" />
-</android.support.constraint.ConstraintLayout>
+        android:src="@drawable/edit_my_photo_icon"
+        app:layout_anchor="@+id/detail_appbar"
+        app:layout_anchorGravity="right|bottom"
+        android:layout_marginEnd="10dp"/>
+
+</android.support.design.widget.CoordinatorLayout>
