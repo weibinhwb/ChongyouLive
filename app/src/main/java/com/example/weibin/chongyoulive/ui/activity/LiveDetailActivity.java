@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.weibin.chongyoulive.R;
+import com.example.weibin.chongyoulive.base.Base;
 import com.example.weibin.chongyoulive.base.LiveData;
 import com.example.weibin.chongyoulive.ui.adapter.HomeLiveAdapter;
 import com.example.weibin.chongyoulive.util.TimeExchangeUtil;
@@ -35,7 +36,7 @@ public class LiveDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_detail);
         Intent intent = getIntent();
-        mLiveData = (LiveData) intent.getSerializableExtra(HomeLiveAdapter.SHOW_DETAIL);
+        mLiveData = (LiveData) intent.getSerializableExtra(Base.SHOW_DETAIL);
         mToolbar = findViewById(R.id.live_detail_toolbar);
         mCollapsingToolbar = findViewById(R.id.live_detail_collapsing_toolbar);
         mLiveTime = findViewById(R.id.live_detail_time);

@@ -18,6 +18,8 @@ import com.example.weibin.chongyoulive.ui.activity.LiveDetailActivity;
 
 import java.util.List;
 
+import static com.example.weibin.chongyoulive.base.Base.SHOW_DETAIL;
+
 public class HomeLiveAdapter extends RecyclerView.Adapter<HomeLiveAdapter.HomeLiveViewHolder> {
 
     private List<LiveData>  mLiveData;
@@ -27,7 +29,6 @@ public class HomeLiveAdapter extends RecyclerView.Adapter<HomeLiveAdapter.HomeLi
     }
 
     private Context mContext;
-    public static final String SHOW_DETAIL = "show_detail";
 
     public HomeLiveAdapter(Context context) {
         mContext = context;
@@ -50,15 +51,6 @@ public class HomeLiveAdapter extends RecyclerView.Adapter<HomeLiveAdapter.HomeLi
         holder.mLiveOwerName.setText(mLiveData.get(i).getOwnerName());
         holder.mLayout.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, LiveDetailActivity.class);
-//            LiveDetailModel model = new LiveDetailModel();
-//            model.setLiveName(mLiveData.get(i).getLiveName());
-////            model.setLiveIntroduce(mLiveData.get(i));
-//            model.setLivePhotoUrl(groupInfoBean.getFaceUrl());
-//            model.setLiveOwener(groupInfoBean.getOwner_Account());
-//            model.setLiveDate(groupInfoBean.getCreateTime() + "");
-//            model.setLiveJoinPerson(groupInfoBean.getMemberList().size() + "");
-////            model.setLiveOwnerIntroduce(groupInfoBean.ge);
-//            model.setLiveId(groupInfoBean.getGroupId());
             intent.putExtra(SHOW_DETAIL, mLiveData.get(i));
             mContext.startActivity(intent);
         });
