@@ -1,8 +1,5 @@
 package com.example.weibin.chongyoulive.base;
 
-import android.content.Intent;
-import android.support.annotation.NonNull;
-
 import java.io.Serializable;
 
 /**
@@ -18,8 +15,27 @@ public class LiveData implements Serializable {
     private String mLiveJoinPerson;
     private String mLiveIntroduce;
     private int mLiveDate;
-    private String mLiveOwenerIntroduce;
+    private String mLiveOwnerIntroduce;
     private String mLiveId;
+    private String mLiveTime;
+    private String mLiveOutLine;
+
+    public String getLiveTime() {
+        return mLiveTime;
+    }
+
+    public void setLiveTime(String liveTime) {
+        mLiveTime = liveTime;
+    }
+
+    public String getLiveOutLine() {
+
+        return mLiveOutLine;
+    }
+
+    public void setLiveOutLine(String liveOutLine) {
+        mLiveOutLine = liveOutLine;
+    }
 
     public String getLiveIntroduce() {
         return mLiveIntroduce;
@@ -37,12 +53,12 @@ public class LiveData implements Serializable {
         mLiveDate = liveDate;
     }
 
-    public String getLiveOwenerIntroduce() {
-        return mLiveOwenerIntroduce;
+    public String getLiveOwnerIntroduce() {
+        return mLiveOwnerIntroduce;
     }
 
-    public void setLiveOwenerIntroduce(String liveOwenerIntroduce) {
-        mLiveOwenerIntroduce = liveOwenerIntroduce;
+    public void setLiveOwnerIntroduce(String liveOwnerIntroduce) {
+        mLiveOwnerIntroduce = liveOwnerIntroduce;
     }
 
     public String getLiveId() {

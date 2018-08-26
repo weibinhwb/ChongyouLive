@@ -13,4 +13,11 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
     </style>
+
+    <style name="Live_Detail_CollapsingToolbar_Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">22sp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxWidth">100dp</item>
+    </style>
 </resources>

@@ -21,7 +21,7 @@ import com.example.weibin.chongyoulive.R;
 import com.example.weibin.chongyoulive.ui.activity.AboutMeDetailActivity;
 import com.example.weibin.chongyoulive.ui.activity.AddLiveActivity;
 import com.example.weibin.chongyoulive.ui.activity.LoginActivity;
-import com.example.weibin.chongyoulive.util.FastBlur;
+import com.example.weibin.chongyoulive.util.RsFlur;
 import com.tencent.imsdk.TIMManager;
 import com.tencent.imsdk.TIMUserProfile;
 import com.tencent.imsdk.ext.group.TIMGroupBaseInfo;
@@ -76,15 +76,14 @@ public class AboutMyLiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if (holder instanceof AboutMyDataViewHolder) {
             ((AboutMyDataViewHolder) holder).mAboutMeName.setText(mTIMUserProfile.getNickName());
             ((AboutMyDataViewHolder) holder).mAboutMeSlogan.setText(mTIMUserProfile.getSelfSignature());
-            Glide.with(holder.itemView.getContext()).load(mTIMUserProfile.getFaceUrl()).into(((AboutMyDataViewHolder) holder).mAboutMeImage);
             Glide.with(holder.itemView.getContext()).asBitmap().load(mTIMUserProfile.getFaceUrl()).into(new SimpleTarget<Bitmap>() {
                 @Override
                 public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                    Glide.with(holder.itemView.getContext()).load(FastBlur.doBlur(resource, 20, false)).into(((AboutMyDataViewHolder) holder).mAboutMeBg);
+                    Glide.with(holder.itemView.getContext()).load(resource).into(((AboutMyDataViewHolder) holder).mAboutMeImage);
+                    Glide.with(holder.itemView.getContext()).load(RsFlur.rsBlur(holder.itemView.getContext(), resource, 15, 1 / 8.0f)).into(((AboutMyDataViewHolder) holder).mAboutMeBg);
                 }
             });
-            if(TIMManager.getInstance().getLoginUser().equals(""))
-            {
+            if (TIMManager.getInstance().getLoginUser().equals("")) {
                 ((AboutMyDataViewHolder) holder).mAboutMeCard.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, LoginActivity.class)));
             } else {
                 ((AboutMyDataViewHolder) holder).mAboutMeCard.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, AboutMeDetailActivity.class)));
@@ -94,13 +93,13 @@ public class AboutMyLiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         } else if (holder instanceof AboutMyLiveViewHolder) {
             ((AboutMyLiveViewHolder) holder).mLiveName.setText(mGroupBaseInfos.get(position - 2).getGroupName());
             Glide.with(holder.itemView.getContext()).load(mGroupBaseInfos.get(position - 2).getFaceUrl()).into(((AboutMyLiveViewHolder) holder).mLiveImage);
-            ((AboutMyLiveViewHolder) holder).mCardView.setOnClickListener(v -> Toast.makeText(mContext, "这是第" + holder.getAdapterPosition()+ "个item", Toast.LENGTH_SHORT).show());
+            ((AboutMyLiveViewHolder) holder).mCardView.setOnClickListener(v -> Toast.makeText(mContext, "这是第" + holder.getAdapterPosition() + "个item", Toast.LENGTH_SHORT).show());
         }
     }
 
     @Override
     public int getItemCount() {
-        return mGroupBaseInfos ==  null || mTIMUserProfile == null? 0 : mGroupBaseInfos.size() + 2;
+        return mGroupBaseInfos == null || mTIMUserProfile == null ? 0 : mGroupBaseInfos.size() + 2;
     }
 
     @Override
@@ -117,6 +116,7 @@ public class AboutMyLiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         TextView mLiveName;
         ImageView mLiveImage;
         CardView mCardView;
+
         AboutMyLiveViewHolder(@NonNull View itemView) {
             super(itemView);
             mCardView = itemView.findViewById(R.id.about_my_live);
@@ -127,6 +127,7 @@ public class AboutMyLiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     static class AboutMyAddLiveViewHolder extends RecyclerView.ViewHolder {
         TextView mAddLiveText;
+
         AboutMyAddLiveViewHolder(@NonNull View itemView) {
             super(itemView);
             mAddLiveText = itemView.findViewById(R.id.about_me_add_live);
@@ -138,6 +139,7 @@ public class AboutMyLiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         TextView mAboutMeName, mAboutMeSlogan, mAboutMeNext;
         CardView mAboutMeCard;
         ImageView mAboutMeBg;
+
         AboutMyDataViewHolder(@NonNull View view) {
             super(view);
             mAboutMeImage = view.findViewById(R.id.about_me_image);

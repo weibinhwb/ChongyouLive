@@ -27,7 +27,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyStyleTheme">
-        <activity android:name=".ui.activity.MainActivity"></activity>
+        <activity android:name=".ui.activity.MainActivity">
+        </activity>
         <!-- 消息收发 service -->
         <service
             android:name="com.tencent.qalsdk.service.QalService"
@@ -76,7 +77,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.LiveDetailActivity"></activity>
+        <activity android:name=".ui.activity.LiveDetailActivity">
+        </activity>
     </application>
 
 </manifest>

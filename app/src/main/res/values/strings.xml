@@ -11,4 +11,10 @@
     <string name="login_title">登录</string>
     <string name="home_fragment_title">主页</string>
     <string name="detail_exchange_photo">更换头像</string>
+    <string name="live_introduction">Live简介</string>
+    <string name="live_presenter">Live主讲人</string>
+    <string name="live_outline">Live大纲</string>
+    <string name="live_title">Live标题</string>
+    <string name="live_time">Live时间</string>
+    <string name="live_out_line">Live大纲</string>
 </resources>

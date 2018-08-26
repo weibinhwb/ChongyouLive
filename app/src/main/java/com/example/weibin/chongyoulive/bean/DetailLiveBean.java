@@ -9,10 +9,11 @@ import java.util.List;
 
 public class DetailLiveBean {
 
+
     /**
      * ActionStatus : OK
      * ErrorCode : 0
-     * GroupInfo : [{"Appid":1400130189,"ApplyJoinOption":"NeedPermission","CreateTime":1534815371,"ErrorCode":0,"FaceUrl":"http://pdqpejgdg.bkt.clouddn.com/1534815372879","GroupId":"@TGS#25NITAMFT","Introduction":"。。","LastInfoTime":1534815371,"LastMsgTime":0,"MaxMemberNum":2000,"MemberList":[{"JoinTime":1534815371,"LastSendMsgTime":0,"Member_Account":"86-13224010650","MsgFlag":"AcceptAndNotify","MsgSeq":0,"Role":"Owner","ShutUpUntil":0}],"MemberNum":1,"Name":"好的第四次","NextMsgSeq":1,"Notification":"","OnlineMemberNum":0,"Owner_Account":"86-13224010650","ShutUpAllMember":"Off","Type":"Public"},{"Appid":1400130189,"ApplyJoinOption":"NeedPermission","CreateTime":1534831663,"ErrorCode":0,"FaceUrl":"http://pdqpejgdg.bkt.clouddn.com/1534831664805","GroupId":"@TGS#27TJ6AMF5","Introduction":"jdjdjd","LastInfoTime":1534831663,"LastMsgTime":0,"MaxMemberNum":2000,"MemberList":[{"JoinTime":1534831663,"LastSendMsgTime":0,"Member_Account":"86-13224010650","MsgFlag":"AcceptAndNotify","MsgSeq":0,"Role":"Owner","ShutUpUntil":0}],"MemberNum":1,"Name":"jdjeke","NextMsgSeq":1,"Notification":"","OnlineMemberNum":0,"Owner_Account":"86-13224010650","ShutUpAllMember":"Off","Type":"Public"},{"Appid":1400130189,"ApplyJoinOption":"NeedPermission","CreateTime":1534827081,"ErrorCode":0,"FaceUrl":"http://pdqpejgdg.bkt.clouddn.com/1534827082441","GroupId":"@TGS#2FR52AMFR","Introduction":"。。。","LastInfoTime":1534827081,"LastMsgTime":0,"MaxMemberNum":2000,"MemberList":[{"JoinTime":1534827081,"LastSendMsgTime":0,"Member_Account":"86-13224010650","MsgFlag":"AcceptAndNotify","MsgSeq":0,"Role":"Owner","ShutUpUntil":0}],"MemberNum":1,"Name":"第五次","NextMsgSeq":1,"Notification":"","OnlineMemberNum":0,"Owner_Account":"86-13224010650","ShutUpAllMember":"Off","Type":"Public"},{"Appid":1400130189,"ApplyJoinOption":"NeedPermission","CreateTime":1534845113,"ErrorCode":0,"FaceUrl":"http://pdqpejgdg.bkt.clouddn.com/1534845114696","GroupId":"@TGS#2GCBIBMFJ","Introduction":"嗯好的","LastInfoTime":1534845113,"LastMsgTime":0,"MaxMemberNum":2000,"MemberList":[{"JoinTime":1534845113,"LastSendMsgTime":0,"Member_Account":"86-13224010650","MsgFlag":"AcceptAndNotify","MsgSeq":0,"Role":"Owner","ShutUpUntil":0}],"MemberNum":1,"Name":"就是这样XP","NextMsgSeq":1,"Notification":"","OnlineMemberNum":0,"Owner_Account":"86-13224010650","ShutUpAllMember":"Off","Type":"Public"},{"Appid":1400130189,"ApplyJoinOption":"NeedPermission","CreateTime":1534864503,"ErrorCode":0,"FaceUrl":"http://pdqpejgdg.bkt.clouddn.com/1534864505243","GroupId":"@TGS#2ILIDCMFX","Introduction":"？？？？","LastInfoTime":1534864503,"LastMsgTime":0,"MaxMemberNum":2000,"MemberList":[{"JoinTime":1534864503,"LastSendMsgTime":0,"Member_Account":"86-13123006240","MsgFlag":"AcceptAndNotify","MsgSeq":0,"Role":"Owner","ShutUpUntil":0}],"MemberNum":1,"Name":"怎么回事","NextMsgSeq":1,"Notification":"","OnlineMemberNum":0,"Owner_Account":"86-13123006240","ShutUpAllMember":"Off","Type":"Public"},{"Appid":1400130189,"ApplyJoinOption":"NeedPermission","CreateTime":1534814473,"ErrorCode":0,"FaceUrl":"http://pdqpejgdg.bkt.clouddn.com/1534814474644","GroupId":"@TGS#2KJYSAMFV","Introduction":"。。。","LastInfoTime":1534814473,"LastMsgTime":0,"MaxMemberNum":2000,"MemberList":[{"JoinTime":1534814473,"LastSendMsgTime":0,"Member_Account":"86-13224010650","MsgFlag":"AcceptAndNotify","MsgSeq":0,"Role":"Owner","ShutUpUntil":0}],"MemberNum":1,"Name":"上传","NextMsgSeq":1,"Notification":"","OnlineMemberNum":0,"Owner_Account":"86-13224010650","ShutUpAllMember":"Off","Type":"Public"},{"Appid":1400130189,"ApplyJoinOption":"NeedPermission","CreateTime":1534814826,"ErrorCode":0,"FaceUrl":"http://pdqpejgdg.bkt.clouddn.com/1534814827489","GroupId":"@TGS#2TN6SAMF6","Introduction":"的","LastInfoTime":1534814826,"LastMsgTime":0,"MaxMemberNum":2000,"MemberList":[{"JoinTime":1534814826,"LastSendMsgTime":0,"Member_Account":"86-13224010650","MsgFlag":"AcceptAndNotify","MsgSeq":0,"Role":"Owner","ShutUpUntil":0}],"MemberNum":1,"Name":"第二次压缩","NextMsgSeq":1,"Notification":"","OnlineMemberNum":0,"Owner_Account":"86-13224010650","ShutUpAllMember":"Off","Type":"Public"},{"Appid":1400130189,"ApplyJoinOption":"NeedPermission","CreateTime":1534814996,"ErrorCode":0,"FaceUrl":"http://pdqpejgdg.bkt.clouddn.com/1534814998144","GroupId":"@TGS#2WLBTAMFN","Introduction":"好的","LastInfoTime":1534814996,"LastMsgTime":0,"MaxMemberNum":2000,"MemberList":[{"JoinTime":1534814996,"LastSendMsgTime":0,"Member_Account":"86-13224010650","MsgFlag":"AcceptAndNotify","MsgSeq":0,"Role":"Owner","ShutUpUntil":0}],"MemberNum":1,"Name":"第三次压缩","NextMsgSeq":1,"Notification":"","OnlineMemberNum":0,"Owner_Account":"86-13224010650","ShutUpAllMember":"Off","Type":"Public"}]
+     * GroupInfo : [{"AppDefinedData":[{"Key":"live_owner","Value":"黄松艺"},{"Key":"live_outline","Value":"好的"},{"Key":"live_intro","Value":"不"},{"Key":"live_own_intr","Value":"开讲啦"},{"Key":"live_time","Value":"2018年8月4日"}],"Appid":1400130189,"ApplyJoinOption":"FreeAccess","CreateTime":1535298059,"ErrorCode":0,"FaceUrl":"http://pdqpejgdg.bkt.clouddn.com/1535298059764","GroupId":"@TGS#2JMKKQMFR","Introduction":"","LastInfoTime":1535298059,"LastMsgTime":0,"MaxMemberNum":2000,"MemberList":[{"JoinTime":1535298059,"LastSendMsgTime":0,"Member_Account":"86-13224010650","MsgFlag":"AcceptAndNotify","MsgSeq":0,"Role":"Owner","ShutUpUntil":0}],"MemberNum":1,"Name":"随便","NextMsgSeq":1,"Notification":"","OnlineMemberNum":0,"Owner_Account":"86-13224010650","ShutUpAllMember":"Off","Type":"Public"}]
      */
 
     private String ActionStatus;
@@ -45,19 +46,20 @@ public class DetailLiveBean {
 
     public static class GroupInfoBean {
         /**
+         * AppDefinedData : [{"Key":"live_owner","Value":"黄松艺"},{"Key":"live_outline","Value":"好的"},{"Key":"live_intro","Value":"不"},{"Key":"live_own_intr","Value":"开讲啦"},{"Key":"live_time","Value":"2018年8月4日"}]
          * Appid : 1400130189
-         * ApplyJoinOption : NeedPermission
-         * CreateTime : 1534815371
+         * ApplyJoinOption : FreeAccess
+         * CreateTime : 1535298059
          * ErrorCode : 0
-         * FaceUrl : http://pdqpejgdg.bkt.clouddn.com/1534815372879
-         * GroupId : @TGS#25NITAMFT
-         * Introduction : 。。
-         * LastInfoTime : 1534815371
+         * FaceUrl : http://pdqpejgdg.bkt.clouddn.com/1535298059764
+         * GroupId : @TGS#2JMKKQMFR
+         * Introduction :
+         * LastInfoTime : 1535298059
          * LastMsgTime : 0
          * MaxMemberNum : 2000
-         * MemberList : [{"JoinTime":1534815371,"LastSendMsgTime":0,"Member_Account":"86-13224010650","MsgFlag":"AcceptAndNotify","MsgSeq":0,"Role":"Owner","ShutUpUntil":0}]
+         * MemberList : [{"JoinTime":1535298059,"LastSendMsgTime":0,"Member_Account":"86-13224010650","MsgFlag":"AcceptAndNotify","MsgSeq":0,"Role":"Owner","ShutUpUntil":0}]
          * MemberNum : 1
-         * Name : 好的第四次
+         * Name : 随便
          * NextMsgSeq : 1
          * Notification :
          * OnlineMemberNum : 0
@@ -84,6 +86,7 @@ public class DetailLiveBean {
         private String Owner_Account;
         private String ShutUpAllMember;
         private String Type;
+        private List<AppDefinedDataBean> AppDefinedData;
         private List<MemberListBean> MemberList;
 
         public int getAppid() {
@@ -230,6 +233,14 @@ public class DetailLiveBean {
             this.Type = Type;
         }
 
+        public List<AppDefinedDataBean> getAppDefinedData() {
+            return AppDefinedData;
+        }
+
+        public void setAppDefinedData(List<AppDefinedDataBean> AppDefinedData) {
+            this.AppDefinedData = AppDefinedData;
+        }
+
         public List<MemberListBean> getMemberList() {
             return MemberList;
         }
@@ -238,9 +249,35 @@ public class DetailLiveBean {
             this.MemberList = MemberList;
         }
 
+        public static class AppDefinedDataBean {
+            /**
+             * Key : live_owner
+             * Value : 黄松艺
+             */
+
+            private String Key;
+            private String Value;
+
+            public String getKey() {
+                return Key;
+            }
+
+            public void setKey(String Key) {
+                this.Key = Key;
+            }
+
+            public String getValue() {
+                return Value;
+            }
+
+            public void setValue(String Value) {
+                this.Value = Value;
+            }
+        }
+
         public static class MemberListBean {
             /**
-             * JoinTime : 1534815371
+             * JoinTime : 1535298059
              * LastSendMsgTime : 0
              * Member_Account : 86-13224010650
              * MsgFlag : AcceptAndNotify

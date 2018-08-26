@@ -57,7 +57,7 @@ public class HomeLiveAdapter extends RecyclerView.Adapter<HomeLiveAdapter.HomeLi
 //            model.setLiveOwener(groupInfoBean.getOwner_Account());
 //            model.setLiveDate(groupInfoBean.getCreateTime() + "");
 //            model.setLiveJoinPerson(groupInfoBean.getMemberList().size() + "");
-////            model.setLiveOwenerIntroduce(groupInfoBean.ge);
+////            model.setLiveOwnerIntroduce(groupInfoBean.ge);
 //            model.setLiveId(groupInfoBean.getGroupId());
             intent.putExtra(SHOW_DETAIL, mLiveData.get(i));
             mContext.startActivity(intent);

@@ -2,6 +2,11 @@ package com.example.weibin.chongyoulive.base;
 
 public class Base {
 
+    public final static String LIVE_INTRO = "live_intro";
+    public final static String LIVE_OUTLINE = "live_outline";
+    public final static String LIVE_OWNER = "live_owner";
+    public final static String LIVE_OWNER_INTRODUCE = "live_own_intr";
+    public final static String LIVE_TIME = "live_time";
     public static final String IDENTIFIER = "weibin";
     public static final int SDK_APPID = 1400130189;
     public static final int ACCOUNT_TYPE = 35940;

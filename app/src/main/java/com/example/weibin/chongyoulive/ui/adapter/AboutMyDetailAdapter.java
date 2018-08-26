@@ -23,7 +23,11 @@ import static android.content.ContentValues.TAG;
  */
 
 
-public class AboutMyDetailAdapter extends RecyclerView.Adapter<AboutMyDetailAdapter.AboutDetailViewHolder> {
+public class AboutMyDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+
+    private static final int TYPE1 = 0;
+    private static final int TYPE2 = 1;
 
     public interface onItemClick {
         void onItemClick(View view, int position);
@@ -55,28 +59,50 @@ public class AboutMyDetailAdapter extends RecyclerView.Adapter<AboutMyDetailAdap
         Log.d(TAG, "setItem2List: " + mItem2List.get(4));
     }
 
+
     @NonNull
     @Override
-    public AboutDetailViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_about_me_detail, parent, false);
-        return new AboutDetailViewHolder(v);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == TYPE1) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_about_me_detail, parent, false);
+            return new AboutDetailViewHolder(v);
+        }
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_about_me_logout, parent, false);
+        return new LogoutViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AboutDetailViewHolder holder, int position) {
-        holder.mItem1.setText(ITEMS[position]);
-        holder.mItem2.setText(mItem2List.get(position));
-        holder.mItemCard.setTag(position);
-        holder.mItemCard.setOnClickListener(v -> {
-            if (mOnItemClick != null) {
-                mOnItemClick.onItemClick(v, (Integer) v.getTag());
-            }
-        });
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof AboutDetailViewHolder) {
+            ((AboutDetailViewHolder) holder).mItem1.setText(ITEMS[position]);
+            ((AboutDetailViewHolder) holder).mItem2.setText(mItem2List.get(position));
+            ((AboutDetailViewHolder) holder).mItemCard.setTag(position);
+            ((AboutDetailViewHolder) holder).mItemCard.setOnClickListener(v -> {
+                if (mOnItemClick != null) {
+                    mOnItemClick.onItemClick(v, (Integer) v.getTag());
+                }
+            });
+        } else if (holder instanceof LogoutViewHolder) {
+            ((LogoutViewHolder) holder).mLogout.setTag(position);
+            ((LogoutViewHolder) holder).mLogout.setOnClickListener(v -> {
+                if (mOnItemClick != null){
+                    mOnItemClick.onItemClick(v, (Integer) v.getTag());
+                }
+            });
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == mItem2List.size()) {
+            return TYPE2;
+        }
+        return TYPE1;
     }
 
     @Override
     public int getItemCount() {
-        return mItem2List == null ? 0 : mItem2List.size();
+        return mItem2List == null ? 0 : mItem2List.size() + 1;
     }
 
     static class AboutDetailViewHolder extends RecyclerView.ViewHolder {
@@ -90,6 +116,14 @@ public class AboutMyDetailAdapter extends RecyclerView.Adapter<AboutMyDetailAdap
             mItem2 = itemView.findViewById(R.id.detail_item_text2);
             mline = itemView.findViewById(R.id.detail_line);
             mItemCard = itemView.findViewById(R.id.detail_item);
+        }
+    }
+
+    static class LogoutViewHolder extends RecyclerView.ViewHolder {
+        TextView mLogout;
+        LogoutViewHolder(@NonNull View itemView) {
+            super(itemView);
+            mLogout = itemView.findViewById(R.id.logout);
         }
     }
 }

@@ -2,6 +2,7 @@ package com.example.weibin.chongyoulive.ui.fragment;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -31,13 +32,16 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.weibin.chongyoulive.R;
 import com.example.weibin.chongyoulive.base.Base;
+import com.example.weibin.chongyoulive.database.UserDatabase;
 import com.example.weibin.chongyoulive.ui.activity.AboutMeDetailActivity;
+import com.example.weibin.chongyoulive.ui.activity.LoginActivity;
 import com.example.weibin.chongyoulive.ui.adapter.AboutMyDetailAdapter;
 import com.example.weibin.chongyoulive.util.photo.MyImageResizer;
 import com.example.weibin.chongyoulive.util.photo.UploadPhoto;
 import com.tencent.imsdk.TIMCallBack;
 import com.tencent.imsdk.TIMFriendGenderType;
 import com.tencent.imsdk.TIMFriendshipManager;
+import com.tencent.imsdk.TIMManager;
 import com.tencent.imsdk.TIMUserProfile;
 import com.tencent.imsdk.TIMValueCallBack;
 
@@ -48,6 +52,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 import static android.app.Activity.RESULT_OK;
 import static com.example.weibin.chongyoulive.util.TimeExchangeUtil.String2Timestamp;
@@ -152,8 +163,8 @@ public class AboutMeDetailFragment extends Fragment implements View.OnClickListe
                 break;
             case 1:
             case 2:
-                TextView t1 = (TextView) view.findViewById(R.id.detail_item_text1);
-                TextView t2 = (TextView) view.findViewById(R.id.detail_item_text2);
+                TextView t1 = view.findViewById(R.id.detail_item_text1);
+                TextView t2 = view.findViewById(R.id.detail_item_text2);
                 Fragment fragment = new ModifyDataFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("param1", String.valueOf(t1.getText()));
@@ -170,6 +181,9 @@ public class AboutMeDetailFragment extends Fragment implements View.OnClickListe
             case 5:
                 break;
             case 6:
+                break;
+            case 7:
+                logout();
                 break;
             default:
         }
@@ -346,6 +360,29 @@ public class AboutMeDetailFragment extends Fragment implements View.OnClickListe
                 Log.e(TAG, "modifyProfile succ");
             }
         });
+    }
+
+    private void logout() {
+        String useId = TIMManager.getInstance().getLoginUser();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("退出当前账号？").setPositiveButton("取消", (dialog, which) -> {
+            dialog.dismiss();
+        }).setPositiveButton("确认退出", (dialog, which) -> TIMManager.getInstance().logout(new TIMCallBack() {
+            @Override
+            public void onError(int code, String desc) {
+                Log.d(TAG, "logout failed. code: " + code + " errmsg: " + desc);
+            }
+
+            @Override
+            public void onSuccess() {
+                new Thread(() -> {
+                    UserDatabase.getINSTANCE(getContext()).getUserEntityDao().deleteUser(useId);
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }).start();
+            }
+        })).show();
     }
 
     private void pickPhoto() {

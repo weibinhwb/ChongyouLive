@@ -19,14 +19,14 @@ public interface UserDao {
     @Insert
     void insertUser(UserEntity userEntity);
 
-    @Delete
-    void deleteUser(UserEntity userEntity);
+    @Query("DELETE FROM user WHERE userId =:useId")
+    void deleteUser(String useId);
 
     @Query("SELECT * FROM  user")
     List<UserEntity> queryUser();
-
-    @Query("UPDATE user SET mNickName =:nickName, mFaceUrl =:faceUrl WHERE id =:id")
-    void updateUser(String nickName, String faceUrl, int id);
+//
+//    @Query("UPDATE user SET mNickName =:nickName, mFaceUrl =:faceUrl WHERE id =:id")
+//    void updateUser(String nickName, String faceUrl, int id);
 
     @Query("SELECT * FROM user WHERE userId = :userId")
     UserEntity findUser(String userId);
