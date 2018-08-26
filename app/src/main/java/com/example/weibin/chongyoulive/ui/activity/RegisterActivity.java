@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.weibin.chongyoulive.base.Base;
@@ -37,7 +38,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         Toolbar registerToolbar = findViewById(R.id.register_toolbar);
         setSupportActionBar(registerToolbar);
-
         QALSDKManager.getInstance().setEnv(0);
         QALSDKManager.getInstance().init(getApplicationContext(), Base.SDK_APPID);
 
@@ -71,6 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.d(TAG, "OnPwdRegCommitSuccess: " + "设置密码成功");
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
 
             @Override

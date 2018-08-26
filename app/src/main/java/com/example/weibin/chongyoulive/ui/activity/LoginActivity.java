@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.weibin.chongyoulive.base.Base;
@@ -29,7 +30,7 @@ import tencent.tls.platform.TLSUserInfo;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     private final static String TAG = "LoginActivity";
-    private Button mCommitLoginButton;
+    private TextView mEnterRegister;
     private EditText mMobileEdit, mPasswordEdit;
 
     private String mIdentify;
@@ -40,12 +41,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Toolbar loginToolbar = findViewById(R.id.login_toolbar);
-        setSupportActionBar(loginToolbar);
-        mCommitLoginButton = findViewById(R.id.login_commit);
+        Button commitLoginButton = findViewById(R.id.login_commit);
+        mEnterRegister = findViewById(R.id.login_enter_register);
+        mEnterRegister.setOnClickListener(this);
         mMobileEdit = findViewById(R.id.login_account);
         mPasswordEdit = findViewById(R.id.login_password);
-        mCommitLoginButton.setOnClickListener(this);
+        commitLoginButton.setOnClickListener(this);
 
     }
 
@@ -101,6 +102,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 mPassword = mPasswordEdit.getText().toString();
                 login();
                 break;
+            case R.id.login_enter_register:
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                break;
+                default:
         }
     }
 

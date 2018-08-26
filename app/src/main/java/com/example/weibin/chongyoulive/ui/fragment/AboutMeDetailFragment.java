@@ -40,15 +40,17 @@ import com.tencent.imsdk.TIMFriendGenderType;
 import com.tencent.imsdk.TIMFriendshipManager;
 import com.tencent.imsdk.TIMUserProfile;
 import com.tencent.imsdk.TIMValueCallBack;
-import com.tencent.imsdk.protocol.msg;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.weibin.chongyoulive.util.TimeExchangeUtil.String2Timestamp;
 
 /**
  * Created by weibin on 2018/8/21
@@ -143,6 +145,36 @@ public class AboutMeDetailFragment extends Fragment implements View.OnClickListe
         }
     }
 
+    @Override
+    public void onItemClick(View view, int position) {
+        switch (position) {
+            case 0:
+                break;
+            case 1:
+            case 2:
+                TextView t1 = (TextView) view.findViewById(R.id.detail_item_text1);
+                TextView t2 = (TextView) view.findViewById(R.id.detail_item_text2);
+                Fragment fragment = new ModifyDataFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("param1", String.valueOf(t1.getText()));
+                bundle.putString("param2", String.valueOf(t2.getText()));
+                fragment.setArguments(bundle);
+                mActivity.showFragment(fragment, this);
+                break;
+            case 3:
+                updateMyGender(view, position);
+                break;
+            case 4:
+                updateMyBirthday(view, position);
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            default:
+        }
+    }
+
     private void updateMyFace() {
         TIMFriendshipManager.ModifyUserProfileParam param = new TIMFriendshipManager.ModifyUserProfileParam();
         if (mModifyPhotoPath != null && !mModifyPhotoPath.equals("")) {
@@ -193,12 +225,16 @@ public class AboutMeDetailFragment extends Fragment implements View.OnClickListe
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         TextView tv = view.findViewById(R.id.detail_item_text2);
         int checkedItem;
-        if (tv.getText().toString().equals("女")) {
-            checkedItem = 1;
-        } else if (tv.getText().toString().equals("男")) {
-            checkedItem = 0;
-        } else {
-            checkedItem = 2;
+        switch (tv.getText().toString()) {
+            case "女":
+                checkedItem = 1;
+                break;
+            case "男":
+                checkedItem = 0;
+                break;
+            default:
+                checkedItem = 2;
+                break;
         }
         final String[] gender = {"男", "女", "保密"};
         builder.setSingleChoiceItems(gender, checkedItem, (dialog, which) -> {
@@ -245,7 +281,7 @@ public class AboutMeDetailFragment extends Fragment implements View.OnClickListe
         int mMonth = nowdate.get(Calendar.MONTH);
         int mDay = nowdate.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog.OnDateSetListener onDateSetListener = (DatePicker view, int year, int monthOfYear, int dayOfMonth) -> {
-            updateMyBirthday(year, monthOfYear, dayOfMonth, v, position);
+            updateMyBirthday(year, monthOfYear + 1, dayOfMonth, v, position);
         };
         new DatePickerDialog(getContext(), onDateSetListener, mYear, mMonth, mDay).show();
 
@@ -253,10 +289,8 @@ public class AboutMeDetailFragment extends Fragment implements View.OnClickListe
 
     private void updateMyBirthday(int yy, int mm, int dd, View v, int position) {
         TIMFriendshipManager.ModifyUserProfileParam param = new TIMFriendshipManager.ModifyUserProfileParam();
-        //生日设置为 2017/5/2
         String time = yy + "-" + mm + "-" + dd + " 00:00:00";
-        int birthday = StringToTimestamp(time);
-        Toast.makeText(getContext(), birthday + "", Toast.LENGTH_SHORT).show();
+        int birthday = String2Timestamp(time);
         param.setBirthday(birthday);
 
         TIMFriendshipManager.getInstance().modifyProfile(param, new TIMCallBack() {
@@ -267,9 +301,9 @@ public class AboutMeDetailFragment extends Fragment implements View.OnClickListe
 
             @Override
             public void onSuccess() {
-                Log.e(TAG, "modifyProfile succ");
+                Toast.makeText(getContext(), "修改成功", Toast.LENGTH_SHORT).show();
                 TextView tv = (TextView) v.findViewById(R.id.detail_item_text2);
-                String time = yy + "年" + mm + "月" + dd + "日";
+                String time = yy + "-" + mm + "-" + dd;
                 tv.setText(time);
             }
         });
@@ -366,50 +400,5 @@ public class AboutMeDetailFragment extends Fragment implements View.OnClickListe
                 break;
             default:
         }
-    }
-
-    @Override
-    public void onItemClick(View view, int position) {
-        switch (position) {
-            case 0:
-                break;
-            case 1:
-            case 2:
-                TextView t1 = (TextView) view.findViewById(R.id.detail_item_text1);
-                TextView t2 = (TextView) view.findViewById(R.id.detail_item_text2);
-                Fragment fragment = new ModifyDataFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("param1", String.valueOf(t1.getText()));
-                bundle.putString("param2", String.valueOf(t2.getText()));
-                fragment.setArguments(bundle);
-                mActivity.showFragment(fragment, this);
-                break;
-            case 3:
-                updateMyGender(view, position);
-                break;
-            case 4:
-                updateMyBirthday(view, position);
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            default:
-        }
-    }
-
-    public static Integer StringToTimestamp(String time) {
-
-        int times = 0;
-        try {
-            times = (int) ((Timestamp.valueOf(time).getTime()) / 1000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (times == 0) {
-            System.out.println("String转10位时间戳失败");
-        }
-        return times;
-
     }
 }

@@ -4,14 +4,19 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.weibin.chongyoulive.R;
+import com.example.weibin.chongyoulive.util.TimeExchangeUtil;
 
 import java.util.List;
+import java.util.concurrent.TimeoutException;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by weibin on 2018/8/25
@@ -46,6 +51,8 @@ public class AboutMyDetailAdapter extends RecyclerView.Adapter<AboutMyDetailAdap
                 mItem2List.set(3, "保密");
                 break;
         }
+        mItem2List.set(4, TimeExchangeUtil.Timestamp2String(Long.valueOf(mItem2List.get(4))).substring(0, 10));
+        Log.d(TAG, "setItem2List: " + mItem2List.get(4));
     }
 
     @NonNull

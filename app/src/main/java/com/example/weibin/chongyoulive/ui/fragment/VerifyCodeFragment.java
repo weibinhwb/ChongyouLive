@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,14 @@ public class VerifyCodeFragment extends Fragment implements View.OnClickListener
         mCodeEdit = view.findViewById(R.id.register_code);
         mCodeCommit = view.findViewById(R.id.register_verify_code);
         mCodeCommit.setOnClickListener(this);
+        initToolbar();
         return view;
+    }
+
+    private void initToolbar(){
+        Toolbar toolbar = mActivity.findViewById(R.id.register_toolbar);
+        mActivity.setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> mActivity.popBackStack());
     }
 
     @Override
