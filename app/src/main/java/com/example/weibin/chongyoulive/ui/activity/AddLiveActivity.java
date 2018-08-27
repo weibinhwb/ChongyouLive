@@ -86,7 +86,7 @@ public class AddLiveActivity extends AppCompatActivity implements View.OnClickLi
         mLiveIntroduction = mLiveIntroduceEdit.getText().toString();
         mLiveOwnerIntroduce = mOwnerIntroductionEdit.getText().toString();
         mLiveOutLine = mLiveOutLineEdit.getText().toString();
-        if (mLivePhotoPath == null || mLivePhotoPath.equals("")){
+        if (mLivePhotoPath == null || mLivePhotoPath.equals("")) {
             Toast.makeText(this, "Live照片添加失败", Toast.LENGTH_SHORT).show();
             return;
         } else if (mLiveTitle == null || mLiveTitle.equals("")) {
@@ -101,7 +101,7 @@ public class AddLiveActivity extends AppCompatActivity implements View.OnClickLi
         } else if (mLiveOwnerIntroduce == null || mLiveOwnerIntroduce.equals("")) {
             Toast.makeText(this, "Live主讲人简介添加失败", Toast.LENGTH_SHORT).show();
             return;
-        } else if (mLiveOutLine == null || mLiveOutLine.equals("")){
+        } else if (mLiveOutLine == null || mLiveOutLine.equals("")) {
             Toast.makeText(this, "Live大纲添加失败", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -130,6 +130,7 @@ public class AddLiveActivity extends AppCompatActivity implements View.OnClickLi
         TIMGroupManager.getInstance().createGroup(param, new TIMValueCallBack<String>() {
             @Override
             public void onError(int i, String s) {
+                Toast.makeText(AddLiveActivity.this, s, Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "onError: " + s);
             }
 
@@ -138,6 +139,9 @@ public class AddLiveActivity extends AppCompatActivity implements View.OnClickLi
                 Log.d(TAG, "onSuccess: " + s);
                 modifyLivePermission(s);
                 Toast.makeText(AddLiveActivity.this, "创建Live成功！", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AddLiveActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
