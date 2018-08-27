@@ -1,6 +1,6 @@
 package com.example.weibin.chongyoulive.base;
 
-import com.example.weibin.chongyoulive.bean.DetailLiveBean;
+import com.example.weibin.chongyoulive.bean.LiveData;
 
 import java.util.List;
 

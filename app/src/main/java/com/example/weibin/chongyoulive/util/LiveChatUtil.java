@@ -4,12 +4,11 @@ import android.os.Environment;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.weibin.chongyoulive.base.LiveApplication;
-import com.example.weibin.chongyoulive.base.Message;
+import com.example.weibin.chongyoulive.bean.Message;
 import com.example.weibin.chongyoulive.database.UserDatabase;
 import com.example.weibin.chongyoulive.database.UserEntity;
 import com.example.weibin.chongyoulive.ui.adapter.LiveChatRecyclerAdapter;
@@ -27,7 +26,6 @@ import com.tencent.imsdk.ext.message.TIMConversationExt;
 import com.tencent.imsdk.ext.message.TIMMessageExt;
 
 import java.io.File;
-import java.util.Date;
 import java.util.List;
 
 

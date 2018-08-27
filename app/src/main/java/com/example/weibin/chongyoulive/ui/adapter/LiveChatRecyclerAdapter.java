@@ -1,6 +1,5 @@
 package com.example.weibin.chongyoulive.ui.adapter;
 
-import android.content.Context;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,13 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.weibin.chongyoulive.R;
-import com.example.weibin.chongyoulive.base.Message;
+import com.example.weibin.chongyoulive.bean.Message;
 import com.example.weibin.chongyoulive.util.LiveChatUtil;
 import com.example.weibin.chongyoulive.util.audio.Audio;
 

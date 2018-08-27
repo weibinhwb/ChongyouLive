@@ -13,8 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.weibin.chongyoulive.R;
-import com.example.weibin.chongyoulive.base.LiveData;
-import com.example.weibin.chongyoulive.bean.DetailLiveBean;
+import com.example.weibin.chongyoulive.bean.LiveData;
 import com.example.weibin.chongyoulive.base.HomeLivePresenter;
 import com.example.weibin.chongyoulive.ui.adapter.HomeLiveAdapter;
 

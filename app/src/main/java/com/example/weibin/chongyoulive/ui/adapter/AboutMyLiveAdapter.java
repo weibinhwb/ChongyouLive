@@ -19,7 +19,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.weibin.chongyoulive.R;
 import com.example.weibin.chongyoulive.base.Base;
-import com.example.weibin.chongyoulive.base.LiveData;
+import com.example.weibin.chongyoulive.bean.LiveData;
 import com.example.weibin.chongyoulive.ui.activity.AboutMeDetailActivity;
 import com.example.weibin.chongyoulive.ui.activity.AddLiveActivity;
 import com.example.weibin.chongyoulive.ui.activity.LiveDetailActivity;

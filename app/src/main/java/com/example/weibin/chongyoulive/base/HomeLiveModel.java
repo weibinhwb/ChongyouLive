@@ -2,9 +2,9 @@ package com.example.weibin.chongyoulive.base;
 
 import android.util.Log;
 
-import com.example.weibin.chongyoulive.bean.DetailLiveBean;
 import com.example.weibin.chongyoulive.bean.DetailLiveBean.GroupInfoBean;
 import com.example.weibin.chongyoulive.bean.LiveBean;
+import com.example.weibin.chongyoulive.bean.LiveData;
 
 import org.json.JSONArray;
 import org.json.JSONException;

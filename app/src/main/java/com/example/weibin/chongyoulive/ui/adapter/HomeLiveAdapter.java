@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.weibin.chongyoulive.R;
-import com.example.weibin.chongyoulive.base.LiveData;
+import com.example.weibin.chongyoulive.bean.LiveData;
 import com.example.weibin.chongyoulive.ui.activity.LiveDetailActivity;
 
 import java.util.List;

@@ -13,9 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.weibin.chongyoulive.R;
 import com.example.weibin.chongyoulive.base.Base;
-import com.example.weibin.chongyoulive.base.LiveData;
-import com.example.weibin.chongyoulive.ui.adapter.HomeLiveAdapter;
-import com.example.weibin.chongyoulive.util.TimeExchangeUtil;
+import com.example.weibin.chongyoulive.bean.LiveData;
 import com.tencent.imsdk.TIMCallBack;
 import com.tencent.imsdk.TIMGroupManager;
 
