@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -26,6 +25,7 @@ import com.example.weibin.chongyoulive.ui.activity.AddLiveActivity;
 import com.example.weibin.chongyoulive.ui.activity.LiveDetailActivity;
 import com.example.weibin.chongyoulive.ui.activity.LoginActivity;
 import com.example.weibin.chongyoulive.util.RsFlur;
+import com.example.weibin.chongyoulive.util.TimeExchangeUtil;
 import com.tencent.imsdk.TIMManager;
 import com.tencent.imsdk.TIMUserProfile;
 import com.tencent.imsdk.TIMValueCallBack;
@@ -33,8 +33,8 @@ import com.tencent.imsdk.ext.group.TIMGroupBaseInfo;
 import com.tencent.imsdk.ext.group.TIMGroupDetailInfo;
 import com.tencent.imsdk.ext.group.TIMGroupManagerExt;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -103,10 +103,12 @@ public class AboutMyLiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             }
         } else if (holder instanceof AboutMyAddLiveViewHolder) {
             ((AboutMyAddLiveViewHolder) holder).mAddLiveText.setOnClickListener(v -> mContext.startActivity(new Intent(mContext, AddLiveActivity.class)));
+            ((AboutMyAddLiveViewHolder) holder).mAboutMyLiveCount.setText(MessageFormat.format("我赞助的live({0})", mGroupBaseInfos.size()));
         } else if (holder instanceof AboutMyLiveViewHolder) {
             ((AboutMyLiveViewHolder) holder).mLiveName.setText(mGroupBaseInfos.get(position - 2).getGroupName());
             Glide.with(holder.itemView.getContext()).load(mGroupBaseInfos.get(position - 2).getFaceUrl()).into(((AboutMyLiveViewHolder) holder).mLiveImage);
             ((AboutMyLiveViewHolder) holder).mCardView.setOnClickListener(v -> getMyLiveInfo(holder.getAdapterPosition()));
+            ((AboutMyLiveViewHolder) holder).mMyJoinTime.setText(String.format("加入时间%s", TimeExchangeUtil.Timestamp2String(mGroupBaseInfos.get(position - 2).getSelfInfo().getJoinTime()).substring(0, 10)));
         }
     }
 
@@ -126,7 +128,7 @@ public class AboutMyLiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     static class AboutMyLiveViewHolder extends RecyclerView.ViewHolder {
-        TextView mLiveName;
+        TextView mLiveName, mMyJoinTime;
         ImageView mLiveImage;
         CardView mCardView;
 
@@ -135,15 +137,17 @@ public class AboutMyLiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             mCardView = itemView.findViewById(R.id.about_my_live);
             mLiveName = itemView.findViewById(R.id.about_my_live_title);
             mLiveImage = itemView.findViewById(R.id.about_my_live_image);
+            mMyJoinTime = itemView.findViewById(R.id.live_join_time);
         }
     }
 
     static class AboutMyAddLiveViewHolder extends RecyclerView.ViewHolder {
-        TextView mAddLiveText;
+        TextView mAddLiveText, mAboutMyLiveCount;
 
         AboutMyAddLiveViewHolder(@NonNull View itemView) {
             super(itemView);
             mAddLiveText = itemView.findViewById(R.id.about_me_add_live);
+            mAboutMyLiveCount = itemView.findViewById(R.id.about_me_join_live);
         }
     }
 
@@ -163,6 +167,7 @@ public class AboutMyLiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             mAboutMeBg = view.findViewById(R.id.about_me_data_bg);
         }
     }
+
     private void getMyLiveInfo(int position) {
         List<String> list = new ArrayList<>();
         list.add(mGroupBaseInfos.get(position - 2).getGroupId());
@@ -176,16 +181,26 @@ public class AboutMyLiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             public void onSuccess(List<TIMGroupDetailInfo> timGroupDetailInfos) {
                 Log.d(TAG, "onSuccess: " + timGroupDetailInfos.get(0).getCustom().size());
                 mLiveData = new LiveData();
+                mLiveData.setLiveId(timGroupDetailInfos.get(0).getGroupId());
                 mLiveData.setLiveName(timGroupDetailInfos.get(0).getGroupName());
                 mLiveData.setLiveFace(timGroupDetailInfos.get(0).getFaceUrl());
-                mLiveData.setLiveTime(Arrays.toString(timGroupDetailInfos.get(0).getCustom().get(Base.LIVE_TIME)));
-                mLiveData.setLiveIntroduce(Arrays.toString(timGroupDetailInfos.get(0).getCustom().get(Base.LIVE_INTRO)));
-                mLiveData.setLiveOwnerIntroduce(Arrays.toString(timGroupDetailInfos.get(0).getCustom().get(Base.LIVE_OWNER_INTRODUCE)));
-                mLiveData.setLiveOutLine(Arrays.toString(timGroupDetailInfos.get(0).getCustom().get(Base.LIVE_OUTLINE)));
+                mLiveData.setLiveTime(byte2String(timGroupDetailInfos.get(0).getCustom().get(Base.LIVE_TIME)));
+                mLiveData.setLiveIntroduce(byte2String(timGroupDetailInfos.get(0).getCustom().get(Base.LIVE_INTRO)));
+                mLiveData.setLiveOwnerIntroduce(byte2String(timGroupDetailInfos.get(0).getCustom().get(Base.LIVE_OWNER_INTRODUCE)));
+                mLiveData.setLiveOutLine(byte2String(timGroupDetailInfos.get(0).getCustom().get(Base.LIVE_OUTLINE)));
                 Intent intent = new Intent(mContext, LiveDetailActivity.class);
                 intent.putExtra(SHOW_DETAIL, mLiveData);
                 mContext.startActivity(intent);
             }
         });
+    }
+
+    private static String byte2String(byte[] res) {
+        try {
+            return new String(res, "UTF-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

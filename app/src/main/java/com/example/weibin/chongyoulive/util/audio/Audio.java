@@ -2,6 +2,8 @@ package com.example.weibin.chongyoulive.util.audio;
 
 import android.os.Environment;
 
+import com.example.weibin.chongyoulive.base.LiveApplication;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -42,7 +44,7 @@ public class Audio implements AudioCapturer.OnAudioCapturedListener{
     public void startCapture() {
         try {
             String fileName = new Date().getTime() + "record.pcm";
-            mSaveFile = new File(Environment.getExternalStorageDirectory(), fileName);
+            mSaveFile = new File(LiveApplication.getInstance().getExternalFilesDir(Environment.DIRECTORY_MUSIC), fileName);
             if (mSaveFile.createNewFile()) {
                 mSaveFos = new FileOutputStream(mSaveFile);
             }

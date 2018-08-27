@@ -1,11 +1,16 @@
 package com.example.weibin.chongyoulive.base;
 
+import io.reactivex.internal.operators.parallel.ParallelFromPublisher;
+import retrofit2.http.PUT;
+
 public class Base {
 
     public final static String LIVE_INTRO = "live_intro";
     public final static String LIVE_OUTLINE = "live_outline";
     public final static String LIVE_OWNER = "live_owner";
     public final static String LIVE_OWNER_INTRODUCE = "live_own_intr";
+    public static final String OPEN_A_LIVE = "open_a_live";
+    public static final String LIVE_TITLE = "live_title";
     public final static String LIVE_TIME = "live_time";
     public static final String IDENTIFIER = "weibin";
     public static final int SDK_APPID = 1400130189;

@@ -36,6 +36,6 @@
         android:layout_gravity="center"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:scaleType="fitXY"/>
+        android:scaleType="centerCrop"/>
 </LinearLayout>
 

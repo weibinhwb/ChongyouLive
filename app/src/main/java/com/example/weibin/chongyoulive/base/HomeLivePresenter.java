@@ -27,6 +27,7 @@ public class HomeLivePresenter implements IHomePresenter<List<LiveData>> {
     @Override
     public void failed() {
         mLiveModel.failed();
+        mIHomeView.failed();
     }
 
     @Override

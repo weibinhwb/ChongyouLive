@@ -136,7 +136,7 @@ public class HomeLiveModel implements IAllLiveModel {
             });
             mIHomePresenter.getData(mLiveData);
         }, throwable -> {
-
+            mIHomePresenter.failed();
         });
     }
 

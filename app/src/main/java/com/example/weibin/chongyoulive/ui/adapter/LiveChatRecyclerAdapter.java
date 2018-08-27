@@ -21,6 +21,7 @@ import com.example.weibin.chongyoulive.util.LiveChatUtil;
 import com.example.weibin.chongyoulive.util.audio.Audio;
 
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,21 +75,26 @@ public class LiveChatRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
             } else {
                 LiveChatUtil.getInstance().setAudioLayoutWidth(((RightSoundViewHolder) holder).mLayout, message.getDuration());
                 Glide.with(holder.itemView.getContext()).load(message.getSpeakerFace()).into(((RightSoundViewHolder) holder).mFaceView);
-                String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + message.getSoundUUid() + ".pcm";
+                String path = holder.itemView.getContext().getExternalFilesDir(Environment.DIRECTORY_MUSIC).getAbsolutePath() + "/" + message.getSoundUUid() + ".pcm";
                 Log.d(TAG, "onBindViewHolder: " + message.getDuration());
-                ((RightSoundViewHolder) holder).mLayout.setOnClickListener(v -> {
-                    Audio.getInstance().play(message.getSoundUUid() == null? new File(message.getLocalSoundFile()): new File(path));
-                });
+                ((RightSoundViewHolder) holder).mSoundTime.setText(MessageFormat.format("{0}\"", (message.getDuration() + 500) / 1000));
+                ((RightSoundViewHolder) holder).mLayout.setOnClickListener(v -> Audio.getInstance().play(message.getSoundUUid() == null ? new File(message.getLocalSoundFile()) : new File(path)));
             }
         } else {
             if (type == Message.TEXT) {
                 Glide.with(holder.itemView.getContext()).load(message.getSpeakerFace()).into(((LeftTextViewHolder) holder).mFaceView);
                 ((LeftTextViewHolder) holder).mLeftText.setText(message.getText());
             } else {
+                if (!message.isRead()) {
+                    ((LeftSoundViewHolder) holder).mIsRead.setVisibility(View.VISIBLE);
+                }
+                ((LeftSoundViewHolder) holder).mSoundTime.setText(MessageFormat.format("{0}\"", (message.getDuration() + 500) / 1000));
                 Glide.with(holder.itemView.getContext()).load(message.getSpeakerFace()).into(((LeftSoundViewHolder) holder).mFaceView);
                 LiveChatUtil.getInstance().setAudioLayoutWidth(((LeftSoundViewHolder) holder).mLayout, (int) message.getDuration());
                 ((LeftSoundViewHolder) holder).mLayout.setOnClickListener(v -> {
-                    String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + message.getSoundUUid() + ".pcm";
+                    ((LeftSoundViewHolder) holder).mIsRead.setVisibility(View.INVISIBLE);
+//                    String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + message.getSoundUUid() + ".pcm";
+                    String path = holder.itemView.getContext().getExternalFilesDir(Environment.DIRECTORY_MUSIC).getAbsolutePath() + "/" + message.getSoundUUid() + ".pcm";
                     Audio.getInstance().play(new File(path));
                 });
             }
@@ -154,23 +160,28 @@ public class LiveChatRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     static class LeftSoundViewHolder extends ViewHolder {
         RelativeLayout mLayout;
-        ImageView mFaceView;
+        ImageView mFaceView, mIsRead;
+        TextView mSoundTime;
 
         LeftSoundViewHolder(@NonNull View itemView) {
             super(itemView);
             mLayout = itemView.findViewById(R.id.live_left);
             mFaceView = itemView.findViewById(R.id.message_face_left);
+            mIsRead = itemView.findViewById(R.id.isRead);
+            mSoundTime = itemView.findViewById(R.id.live_left_audio_time);
         }
     }
 
     static class RightSoundViewHolder extends ViewHolder {
         RelativeLayout mLayout;
         ImageView mFaceView;
+        TextView mSoundTime;
 
         RightSoundViewHolder(@NonNull View itemView) {
             super(itemView);
             mLayout = itemView.findViewById(R.id.live_right_sound_layout);
             mFaceView = itemView.findViewById(R.id.message_face_right);
+            mSoundTime = itemView.findViewById(R.id.live_right_audio_time);
         }
     }
 }

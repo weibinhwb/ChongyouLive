@@ -19,6 +19,9 @@ import com.example.weibin.chongyoulive.util.TimeExchangeUtil;
 import com.tencent.imsdk.TIMCallBack;
 import com.tencent.imsdk.TIMGroupManager;
 
+import static com.example.weibin.chongyoulive.base.Base.LIVE_TITLE;
+import static com.example.weibin.chongyoulive.base.Base.OPEN_A_LIVE;
+
 public class LiveDetailActivity extends AppCompatActivity {
 
     private CollapsingToolbarLayout mCollapsingToolbar;
@@ -28,7 +31,6 @@ public class LiveDetailActivity extends AppCompatActivity {
     private FloatingActionButton mFb;
 
     private LiveData mLiveData;
-    public static final String OPEN_A_LIVE = "open_a_live";
     private static final String TAG = "LiveDetailActivity";
 
     @Override
@@ -65,6 +67,7 @@ public class LiveDetailActivity extends AppCompatActivity {
                 if (i == 10013) {
                     Intent intent = new Intent(LiveDetailActivity.this, LiveActivity.class);
                     intent.putExtra(OPEN_A_LIVE, mLiveData.getLiveId());
+                    intent.putExtra(LIVE_TITLE, mLiveData.getLiveName());
                     startActivity(intent);
                 }
             }
@@ -73,6 +76,7 @@ public class LiveDetailActivity extends AppCompatActivity {
                 Log.d(TAG, "onSuccess: " + "加入成功");
                 Intent intent = new Intent(LiveDetailActivity.this, LiveActivity.class);
                 intent.putExtra(OPEN_A_LIVE, mLiveData.getLiveId());
+                intent.putExtra(LIVE_TITLE, mLiveData.getLiveName());
                 startActivity(intent);
             }
         }));

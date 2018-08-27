@@ -24,6 +24,7 @@ import com.tencent.imsdk.TIMSoundElem;
 import com.tencent.imsdk.TIMTextElem;
 import com.tencent.imsdk.TIMValueCallBack;
 import com.tencent.imsdk.ext.message.TIMConversationExt;
+import com.tencent.imsdk.ext.message.TIMMessageExt;
 
 import java.io.File;
 import java.util.Date;
@@ -227,12 +228,15 @@ public class LiveChatUtil {
                 msg.setText(e.getText());
                 msg.setType(Message.TEXT);
             } else if (type == TIMElemType.Sound) {
+                TIMMessageExt ext = new TIMMessageExt(message);
                 TIMSoundElem e = (TIMSoundElem) elem;
                 msg.setType(Message.SOUND);
                 msg.setDuration(e.getDuration());
                 msg.setSoundUUid(e.getUuid());
+                msg.setRead(ext.isRead());
                 saveSound(e);
             }
+            msg.setSenderName(message.getSender());
             msg.setDate(message.timestamp() + "");
             msg.setSpeakerFace(message.getSenderProfile() != null ? message.getSenderProfile().getFaceUrl() : "");
             if (message.isSelf()) {
@@ -254,7 +258,7 @@ public class LiveChatUtil {
 
     private void saveSound(TIMSoundElem e) {
         String fileName = e.getUuid() + ".pcm";
-        File file = new File(Environment.getExternalStorageDirectory(), fileName);
+        File file = new File(LiveApplication.getInstance().getExternalFilesDir(Environment.DIRECTORY_MUSIC), fileName);
         try {
             if (!file.createNewFile()) {
                 return;

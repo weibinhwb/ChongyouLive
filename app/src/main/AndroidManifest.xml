@@ -67,7 +67,9 @@
 
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
-        <activity android:name=".ui.activity.LiveActivity" />
+        <activity android:name=".ui.activity.LiveActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
         <activity android:name=".ui.activity.AddLiveActivity" />
         <activity android:name=".ui.activity.AboutMeDetailActivity" />
         <activity android:name=".ui.activity.StartAppActivity">

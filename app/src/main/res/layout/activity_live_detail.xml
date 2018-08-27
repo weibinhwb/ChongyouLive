@@ -304,6 +304,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp" />
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/chat_live_icon"/>
 
 </android.support.design.widget.CoordinatorLayout>

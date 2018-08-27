@@ -3,6 +3,7 @@ package com.example.weibin.chongyoulive.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,6 +25,7 @@ import java.util.List;
 public class AboutMeFragment extends BaseFragment {
 
     private RecyclerView mAboutMeLiveRecycler;
+    private SwipeRefreshLayout mRefreshLayout;
     private AboutMyLiveAdapter mMyLiveAdapter;
     private ProgressBar mLoading;
 
@@ -43,7 +45,19 @@ public class AboutMeFragment extends BaseFragment {
         mMyLiveAdapter = new AboutMyLiveAdapter(getContext());
         mAboutMeLiveRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mAboutMeLiveRecycler.setAdapter(mMyLiveAdapter);
+        mRefreshLayout = view.findViewById(R.id.about_me_refresh);
+        mRefreshLayout.setOnRefreshListener(() -> {
+            loadData();
+            mRefreshLayout.setRefreshing(false);
+        });
         return view;
+    }
+
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        Log.d(TAG, "onHiddenChanged: " + "重新启动" + hidden);
     }
 
     @Override

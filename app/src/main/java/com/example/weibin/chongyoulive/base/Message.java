@@ -20,6 +20,24 @@ public class Message {
     private String mSoundUUid;
     private String mSpeakerFace;
     private String mLocalSoundFile;
+    private String mSenderName;
+    private boolean isRead;
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void setRead(boolean read) {
+        isRead = read;
+    }
+
+    public String getSenderName() {
+        return mSenderName;
+    }
+
+    public void setSenderName(String senderName) {
+        mSenderName = senderName;
+    }
 
     public String getLocalSoundFile() {
         return mLocalSoundFile;
